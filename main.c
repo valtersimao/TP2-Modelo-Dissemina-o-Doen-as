@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-//função que é necessária pra usar ''
+//função que é necessária pra usar o tipo 'uint32_t'
 #include <stdint.h>
 
 #include "pessoa.h"
@@ -30,13 +30,16 @@ static int sorteia(int prob) {
 //Utilize o código abaixo para verificar se a função fornecida de fato funcionará conforme esperado.
 
 int main(){
-   for(int i = 0; i < 20; i++){
-       int valor_sorteado = (int)(xorshift32() % 100u);
-       printf("%d", valor_sorteado);
-       if(i < 20-1)
-            printf(",");
-    }
-    printf("\n");
+
+    
+
+    // for(int i = 0; i < 20; i++){
+    //     int valor_sorteado = (int)(xorshift32() % 100u);
+    //     printf("%d", valor_sorteado);
+    //     if(i < 20-1)
+    //         printf(",");
+    // }
+    // printf("\n");
 
     return 0;
 }
