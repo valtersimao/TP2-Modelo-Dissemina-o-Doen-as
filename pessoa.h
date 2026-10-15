@@ -3,6 +3,6 @@
 
 typedef struct Pessoa;
 
-int pessoaGet
+int pessoaGet(Pessoa *pessoa);
 
 #endif
