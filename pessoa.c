@@ -1,9 +1,9 @@
 #include "pessoa.h"
 
-typedef struct{
+struct pessoa{
     
     int id;
     int idade;
     char nome[26];
 
-} Pessoa;
+};
