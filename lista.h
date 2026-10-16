@@ -6,6 +6,11 @@
 
 typedef struct lista Lista;
 
-
+Lista *ListaCria();
+bool ListaEsvazia(Lista *pLista);
+Lista *ListaDestroi(Lista *pLista);
+Lista EhVazia(Lista *pLista);
+bool ListaInsereMeio(Lista *pLista, int index, Item valor);
+bool ListaInsereMeio(Lista *pLista, Pessoa *pessoa, Item valor);
 
 #endif
