@@ -3,6 +3,7 @@
 
 //cada uma das simulações deve guardar uma pessoa
 #include "pessoa.h"
+
 typedef struct lista Lista;
 
 
