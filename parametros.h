@@ -6,7 +6,7 @@ typedef struct parametros{
     double P;// -> percentual da população infectada no dia 0
     double L;// -> probabilidade (%) de um infectado do estado 2 infectar um saudável (estado 1)
     dobule K;// -> probabilidade (%) de um doente do estado 3 infectar um saudável (estado 1) (K > L)
-    double F;// -> probabilidade (%) de um infectado (estado 2) desenvolver a doença
+    double F;// -> probabilidade (%) de um infectado (estado 2) desenvolver a doença (estado 3)
     double M;// -> probabilidade (%) de um doente (estado 3) vir a óbito
     int D;// -> duração da simulação, em dias
     int R;// -> dia em que a vacina passa a ser distribuída

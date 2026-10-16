@@ -1,15 +1,12 @@
 #include "pessoa.h"
 
-struct pessoa{
-    int id;
-    int idade;
-    char nome[26];
-};
+Pessoa *PessoaCria(int id, int idade, char nome[]){
+    Pessoa pPessoa;
+    
+    int tamanhoNome = strlen(nome);
+    int padronizaNome = tamanhoNome-1;
+    pPessoa->nome = nome;
 
-Pessoa *PessoaCria(){
-    Pessoa *pPessoa = (Pessoa*) malloc(sizeof(Pessoa));
-    if(!pPessoa) return NULL;
-    pPessoa->id = ;
-    pPessoa->idade = ;
-    pPessoa->nome = ;
+    pPessoa->id = id;
+    pPessoa->idade = idade;
 }

@@ -31,7 +31,7 @@ static int sorteia(int prob) {
 
 int main(){
 
-    
+        
 
     // for(int i = 0; i < 20; i++){
     //     int valor_sorteado = (int)(xorshift32() % 100u);

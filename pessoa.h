@@ -1,8 +1,13 @@
 #ifndef PESSOA_H
 #define PESSOA_H
 
-typedef struct pessoa Pessoa;
+typedef struct {
+    int id;
+    int idade;
+    char nome[26];
+} Pessoa;
 
-int pessoaGet(Pessoa *pessoa);
+Pessoa *PessoaCria(int id, int idade, char nome[]);
+void PessoaGet(Pessoa *pPessoa, int id);
 
 #endif
