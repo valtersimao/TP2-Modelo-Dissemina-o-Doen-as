@@ -3,7 +3,7 @@
 
 typedef struct celula {
     struct celula *proximo;
-    Item item;
+    Pessoa *pessoa;
 } Celula;
 
 struct lista {
@@ -29,13 +29,13 @@ Lista *ListaCria(){
 
 bool ListaEsvazia(Lista *pLista){
     if(!pLista) return false;
-    Celula *auxilair = pLista->cabeca->proximo;
-    //liberando endereço by endereço
+    Celula *auxiliar = pLista->cabeca->proximo;
+    //liberando endereço por endereço
     while(auxiliar){
         //proximo da cabeça anda pra frente e atualiza
         pLista->cabeca->proximo = auxiliar->proximo;
         free(auxiliar);
-        //proximo da cabeça anda pra frente
+        //proximo da cabeça anda
         auxiliar = pLista->cabeca->proximo;
     }
     //reiniciar a lista agora
@@ -43,17 +43,27 @@ bool ListaEsvazia(Lista *pLista){
     return true;
 }
 
-Lista *ListaDestroi(Lista *pListas){
+Lista *ListaDestroi(Lista *pLista){
     if(!pLista) return NULL;
+
+    Celula *liberaPessoas = pLista->cabeca->proximo;
+    //liberando pessoa por pessoa
+    while(liberaPessoas){
+        PessoaDestroi(liberaPessoas->pessoa);
+        liberaPessoas = liberaPessoas->proximo;
+    }
+
     ListaEsvazia(pLista);
+
     free(pLista->cabeca);
     free(pLista);
+
     return NULL;
 }
 
 bool ListEhVazia(Lista *pLista){
     if(pLista){
-        if(pLista->cabeca == pLista->ultimo)
+        if(pLista->cabeca == pLista->ultima)
             return true;
         else
             return false;
@@ -61,32 +71,34 @@ bool ListEhVazia(Lista *pLista){
     return false;
 }
 
-bool ListaInsereMeio(Lista *pLista, int index, Item valor){
+bool ListaInsereInicio(Lista *pLista, Pessoa *pPessoa){
     if(!pLista) return false;
-    if(index < pLista->cabeca || index > pLista->ultimo) return false;
 
     Celula *nova = (Celula*) malloc(sizeof(Celula));
     if(!nova) return false;
 
-    nova->item = valor;
+    nova->pessoa = pPessoa;
+
+    if(pLista->cabeca->proximo == NULL)
+        pLista->ultimo = nova;
+
     Celula *auxiliar = pLista->cabeca;
-    //anda na lista
-    for(int i = 0; i < index; i++)
-        auxiliar = auxiliar->proximo;
-    
     nova->proximo = auxiliar->proximo;
     auxiliar->proximo = nova;
-
-    if(index == pLista->tamanhoAtual)
-        pLista->ultimo = nova;// nova é a "ultima celula"
-    //de qualquer forma, executa
-    pLista->tamanhoAtual++;
+    
+    pLista->tamanhoDaLista++;
     return true;
 }
 
-bool ListaRetiraMeio(Lista *pLista, int index, Item *pX){
+/*
+FILA - O index vai ser sempre 0 pra REMOÇÃO FIFO
+PILHA - O index vai ser sempre o tamanho da lista
+[int tamanhoDaLista] pra REMOÇÃO LIFO
+*/
+
+bool ListaRetiraMeio(Lista *pLista, int index, Pessoa *pessoaPassa){
     if(!pLista || !pX) return false;
-    if(index < 0 || index >= pLista->tamanhoAtual) return false;
+    if(index < 0 || index >= pLista->tamanhoDaLista) return false;
 
     //vou buscar a que eu quero remover
     Celula *anterior = pLista->cabeca;
@@ -101,20 +113,20 @@ bool ListaRetiraMeio(Lista *pLista, int index, Item *pX){
     Celula *auxiliar = anterior->proximo;//agora auxiliar é a que tá meu valor buscado
     anterior->proximo = auxiliar->proximo;
     //anteriror aponta pra onde auxilair ta apontando
-    *pX = auxiliar->item;//salvo o item da que vou remover
+    *pessoaPassa = auxiliar->pessoa;//salvo a pessoa que vou remover
     free(auxiliar);
     
-    if(index == pLista->tamanhoAtual-1)
-        pLista->ultimo = anterior;
+    if(index == pLista->tamanhoDaLista-1)
+        pLista->ultima = anterior;
     
-    pLista->tamanhoAtual--;
+    pLista->tamanhoDaLista--;
     return true;
 }
 
-bool ListaInsereInicio(Lista *pLista, Pessoa *pessoa, Item item){
-    ListaInsereMeio(pLista, 0, item);
-}//true or false
+bool ListaRemoveInicio(Lista *pLista, int indice, Pessoa *pessoa){
+    ListaRetiraMeio(pLista, 0, pessoa);
+}
 
-bool ListaRetiraMeio(){
-    
+bool ListaRemoveFim(Lista *pLista, int indice, Pessoa *pessoa){
+    ListaRetiraMeio(pLista, pLista->tamanhoDaLista, pessoa);
 }
