@@ -4,10 +4,10 @@
 typedef struct {
     int id;
     int idade;
-    char nome[26];
+    char *nome;
 } Pessoa;
 
-Pessoa *PessoaCria(int id, int idade, char nome[]);
-void PessoaGet(Pessoa *pPessoa, int id);
+Pessoa *PessoaCria(int id, int idade, char *nome);
+Pessoa *PessoaDestroi(Pessoa *pPessoa);
 
 #endif

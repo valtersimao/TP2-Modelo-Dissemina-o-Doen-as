@@ -84,6 +84,33 @@ bool ListaInsereMeio(Lista *pLista, int index, Item valor){
     return true;
 }
 
+bool ListaRetiraMeio(Lista *pLista, int index, Item *pX){
+    if(!pLista || !pX) return false;
+    if(index < 0 || index >= pLista->tamanhoAtual) return false;
+
+    //vou buscar a que eu quero remover
+    Celula *anterior = pLista->cabeca;
+    
+    for(int j = 0; j < index; j++)
+        anterior = anterior->proximo;
+    //o anterior aponta para a célula antes da que vai sair
+    
+    //vou remover o auxiliar
+    //(anterior->proximo)->proximo
+    //(a anterior a que eu quero)->(a que eu quero)
+    Celula *auxiliar = anterior->proximo;//agora auxiliar é a que tá meu valor buscado
+    anterior->proximo = auxiliar->proximo;
+    //anteriror aponta pra onde auxilair ta apontando
+    *pX = auxiliar->item;//salvo o item da que vou remover
+    free(auxiliar);
+    
+    if(index == pLista->tamanhoAtual-1)
+        pLista->ultimo = anterior;
+    
+    pLista->tamanhoAtual--;
+    return true;
+}
+
 bool ListaInsereInicio(Lista *pLista, Pessoa *pessoa, Item item){
     ListaInsereMeio(pLista, 0, item);
 }//true or false

@@ -6,7 +6,7 @@
 
 typedef struct lista Lista;
 
-Lista *ListaCria();
+Lista *ListaCria(Pessoa *pPessoa);
 Lista *ListaDestroi(Lista *pLista);
 bool ListaEsvazia(Lista *pLista);
 bool ListaEhVazia(Lista *pLista);
