@@ -80,7 +80,7 @@ bool ListaInsereInicio(Lista *pLista, Pessoa *pPessoa){
     nova->pessoa = pPessoa;
 
     if(pLista->cabeca->proximo == NULL)
-        pLista->ultimo = nova;
+        pLista->ultima = nova;
 
     Celula *auxiliar = pLista->cabeca;
     nova->proximo = auxiliar->proximo;
@@ -97,7 +97,7 @@ PILHA - O index vai ser sempre o tamanho da lista
 */
 
 bool ListaRetiraMeio(Lista *pLista, int index, Pessoa *pessoaPassa){
-    if(!pLista || !pX) return false;
+    if(!pLista || !pessoaPassa) return false;
     if(index < 0 || index >= pLista->tamanhoDaLista) return false;
 
     //vou buscar a que eu quero remover
@@ -123,10 +123,11 @@ bool ListaRetiraMeio(Lista *pLista, int index, Pessoa *pessoaPassa){
     return true;
 }
 
+//bool retorna bool
 bool ListaRemoveInicio(Lista *pLista, int indice, Pessoa *pessoa){
-    ListaRetiraMeio(pLista, 0, pessoa);
+    return ListaRetiraMeio(pLista, 0, pessoa);
 }
 
 bool ListaRemoveFim(Lista *pLista, int indice, Pessoa *pessoa){
-    ListaRetiraMeio(pLista, pLista->tamanhoDaLista, pessoa);
+    return ListaRetiraMeio(pLista, pLista->tamanhoDaLista, pessoa);
 }
