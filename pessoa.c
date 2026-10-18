@@ -17,7 +17,14 @@ Pessoa *PessoaCria(int id, int idade, char *nome){
     pPessoa->idade = idade;
     return pPessoa;
 }
-//usar so no final do programa pra não perder tudo
+/*
+Caso ocorra de destruir uma pessoa, o ponteiro vai ficar inválido
+e não vai dar pra inserir essa pessoa dps na próxima lista.
+
+A pessoa so deve ser destruida quando a
+simulação terminar dentro de ListaDestroi().
+*/
+//usar so no final do programa pra não perder a pessoa (ou a ref. pra ela ne)
 Pessoa *PessoaDestroi(Pessoa *pPessoa){
     if(!pPessoa) return NULL;
     free(pPessoa->nome);
