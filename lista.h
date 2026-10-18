@@ -13,6 +13,7 @@ bool ListaEhVazia(Lista *pLista);
 bool ListaInsereInicio(Lista *pLista, Pessoa *pPessoa);
 
 Pessoa *ListaRetiraMeio(Lista *pLista, int pessoa_id);
-bool ListaRemoveInicio(Lista *pLista, Pessoa *pessoa);
-bool ListaRemoveFim(Lista *pLista, Pessoa *pessoa);
+Pessoa *ListaRemoveInicio(Lista *pLista);
+Pessoa *ListaRemoveFim(Lista *pLista);
+
 #endif

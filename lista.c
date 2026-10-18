@@ -16,10 +16,13 @@ Lista *ListaCria(){
     if(!pLista) return NULL;
     //Criar a cabeça
     pLista->cabeca = (Celula*) malloc(sizeof(Celula));
-    if(pLista->cabeca){
+    if(!pLista->cabeca){
         free(pLista);
         return NULL;
     }
+
+    pLista->cabeca->pessoa = NULL;
+
     pLista->cabeca->proximo = NULL;
     pLista->ultima = pLista->cabeca;
     pLista->tamanhoDaLista = 0;
@@ -30,16 +33,20 @@ Lista *ListaCria(){
 bool ListaEsvazia(Lista *pLista){
     if(!pLista) return false;
     Celula *auxiliar = pLista->cabeca->proximo;
+    Celula *proxima = pLista->cabeca;
     //liberando endereço por endereço
     while(auxiliar){
         //proximo da cabeça anda pra frente e atualiza
-        pLista->cabeca->proximo = auxiliar->proximo;
+        proxima = auxiliar->proximo;
         free(auxiliar);
         //proximo da cabeça anda
-        auxiliar = pLista->cabeca->proximo;
+        auxiliar = proxima;
     }
-    //reiniciar a lista agora
+    //reiniciar a lista toda agora
+    pLista->cabeca->proximo = NULL;
     pLista->ultima = pLista->cabeca;
+    pLista->tamanhoDaLisa = 0;
+
     return true;
 }
 
@@ -61,7 +68,7 @@ Lista *ListaDestroi(Lista *pLista){
     return NULL;
 }
 
-bool ListEhVazia(Lista *pLista){
+bool ListaEhVazia(Lista *pLista){
     if(pLista){
         if(pLista->cabeca == pLista->ultima)
             return true;
@@ -73,6 +80,7 @@ bool ListEhVazia(Lista *pLista){
 
 bool ListaInsereInicio(Lista *pLista, Pessoa *pPessoa){
     if(!pLista) return false;
+    if(!pPessoa) return false;
 
     Celula *nova = (Celula*) malloc(sizeof(Celula));
     if(!nova) return false;
@@ -99,33 +107,72 @@ PILHA - O index vai ser sempre o tamanho da lista
 Pessoa *ListaRetiraMeio(Lista *pLista, int pessoa_id){
     if(!pLista) return NULL;
 
-    //vou buscar a que eu quero remover
-    Celula *atual = pLista->cabeca->proximo;
-    
-    while(atual != NULL && atual->pessoa->id != id){
-        atual = atual->proximo
+    Celula *anterior = pLista->cabeca;
+    Celula *atual = pLista->cabeca->proximo;//a busca começa daqui
+
+    //fazendo a busca da celula
+    while(atual != NULL && atual->pessoa->id != pessoa_id){
+        anterior = atual;
+        atual = atual->proximo;
     }
-    //vou remover o auxiliar
-    //(atual->proximo)->proximo
-    //(a atual a que eu quero)->(a que eu quero)
-    Celula *auxiliar = atual->proximo;//agora atual é a que tá meu valor buscado
-    atual->proximo = auxiliar->proximo;
-    //anteriror aponta pra onde auxilair ta apontando
-    *pessoaPassa = atual->pessoa;//salvo a pessoa que vou remover
-    free(auxiliar);
-    
-    if(index == pLista->tamanhoDaLista-1)
-        pLista->ultima = atual;
+    if(!atual) return NULL;
+
+    //pra remover a célula encontrada da lista
+    anterior->proximo = atual->proximo;
+    if(atual == pLista->ultima){//se a que eu removi era a última
+        //atualizo o ponteiro que ultima irá apontar
+        pLista->ultima = anterior;
+    }
+    //guarda e passa a pessoa antes de liberar a Célula
+    Pessoa *pessoaRemovida = atual->pessoa;
+    free(atual);
     
     pLista->tamanhoDaLista--;
-    return true;
+    
+    return pessoaRemovida;//por isso que é do tipo 'Pessoa'
 }
 
 //bool retorna bool
-bool ListaRemoveInicio(Lista *pLista, Pessoa *pessoa){
-    return ListaRetiraMeio(pLista, 0, pessoa);
+Pessoa *ListaRemoveInicio(Lista *pLista){
+    if(!pLista) return NULL;
+    //remover a primeira
+    Celula *remover = pLista->cabeca->proximo;
+    if(!remover) return NULL; // significa que a lista está vazia
+    //aponta para o próximo após o primeiro
+    pLista->cabeca->proximo = remover->proximo;
+
+    if(remover == pLista->ultima)//se o 1º for igual ao último
+        pLista->ultima = pLista->cabeca;
+    
+    Pessoa *pessoaRemovida = remover->pessoa;
+    free(remover);
+
+    pLista->tamanhoDaLista--;
+
+    return pessoaRemovida;
 }
 
-bool ListaRemoveFim(Lista *pLista, Pessoa *pessoa){
-    return ListaRetiraMeio(pLista, pessoa->id);
+Pessoa *ListaRemoveFim(Lista *pLista){
+    if(!pLista) return NULL;
+    Celula *anterior = pLista->cabeca;
+    Celula *atual = pLista->cabeca->proximo;
+
+    if(!atual) return NULL;//SIGNIFICA: Lista Vazia
+
+    while(atual->proximo != NULL){
+        /*uso atual->proximo por que quando ele apontar pra NULL
+          vou estar atualmente em cima da Célula que eu quero*/
+        anterior = atual;
+        atual = atual->proximo;
+    }
+
+    anterior->proximo = NULL;//o que anterior aponta fica com NULL (no caso o atual)
+    pLista->ultima = anterior;//apontando o ultimo pro anterior ao que foi removido
+    
+    Pessoa *pessoaRemovida = atual->pessoa;//essa é a que eu removi da lista (desreferenciei ela)
+    free(atual);//liberei
+
+    pLista->tamanhoDaLista--;
+
+    return pessoaRemovida;
 }
