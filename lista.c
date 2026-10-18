@@ -96,7 +96,7 @@ PILHA - O index vai ser sempre o tamanho da lista
 [int tamanhoDaLista] pra REMOÇÃO LIFO
 */
 
-Pessoa ListaRetiraMeio(Lista *pLista, int pessoa_id){
+Pessoa *ListaRetiraMeio(Lista *pLista, int pessoa_id){
     if(!pLista) return NULL;
 
     //vou buscar a que eu quero remover

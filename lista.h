@@ -11,8 +11,8 @@ Lista *ListaDestroi(Lista *pLista);
 bool ListaEsvazia(Lista *pLista);
 bool ListaEhVazia(Lista *pLista);
 bool ListaInsereInicio(Lista *pLista, Pessoa *pPessoa);
-Pessoa ListaRemoveMeio(Lista *pLista, int pessoa_id);
+
+Pessoa *ListaRetiraMeio(Lista *pLista, int pessoa_id);
 bool ListaRemoveInicio(Lista *pLista, Pessoa *pessoa);
 bool ListaRemoveFim(Lista *pLista, Pessoa *pessoa);
-
 #endif
