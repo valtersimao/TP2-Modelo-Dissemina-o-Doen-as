@@ -32,4 +32,6 @@ void AlgoritmoOrdenacaoMerge(Lista *pLista){
     while(atual != NULL && atual->proximo != NULL){
         atual = atual->proximo;
     }
+    //atualizaçao
+    pLista->ultimo atual;
 }
