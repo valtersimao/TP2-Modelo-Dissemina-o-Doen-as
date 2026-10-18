@@ -16,6 +16,30 @@ bool VerificaPriori(Pessoa *pessoa1, Pessoa *pessoa2){
     return false;//não ocorre a troca
 }
 
+//achar o meio da lista
+Celula *dividirLista(Celula *cabeca){
+    if(!cabeca) return NULL;
+
+    Cabeca *lentinho = cabeca;
+    Cabeca *rapidinho = cabeca->proximo;
+    while(rapidinho !=NULL && rapidinho->proximo != NULL){
+        lentinho = lentinho->proximo;
+        rapidinho = rapidinho->proximo->proximo;
+    }
+    //terminou o laço, lentinho vai estar no meio da lista
+    //no final da minha primeira metade
+    Celula *metade2 = lentinho->proximo;//referencia a segunda metade toda
+    //agora eu posso cortar minha lista no meio sem perder a referencia
+    lentinho->proximo = NULL;
+
+    //retorna o ponteiro apontando pro inicio da minha segunda metade
+    return metade2;
+}
+
+Celula *IntercalaListas(Celula *A, Celula *B){
+    
+}
+
 //já vem da lista direto pra ca
 //Dividir pra Conquistar 
 void AlgoritmoOrdenacaoMerge(Lista *pLista){
