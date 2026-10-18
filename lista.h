@@ -10,7 +10,9 @@ Lista *ListaCria(Pessoa *pPessoa);
 Lista *ListaDestroi(Lista *pLista);
 bool ListaEsvazia(Lista *pLista);
 bool ListaEhVazia(Lista *pLista);
-bool ListaInsereMeio(Lista *pLista, int index, Item valor);
-bool ListaInsereMeio(Lista *pLista, Pessoa *pessoa, Item valor);
+bool ListaInsereInicio(Lista *pLista, Pessoa *pPessoa);
+Pessoa ListaRemoveMeio(Lista *pLista, int pessoa_id);
+bool ListaRemoveInicio(Lista *pLista, Pessoa *pessoa);
+bool ListaRemoveFim(Lista *pLista, Pessoa *pessoa);
 
 #endif

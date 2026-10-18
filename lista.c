@@ -96,38 +96,36 @@ PILHA - O index vai ser sempre o tamanho da lista
 [int tamanhoDaLista] pra REMOÇÃO LIFO
 */
 
-bool ListaRetiraMeio(Lista *pLista, int index, Pessoa *pessoaPassa){
-    if(!pLista || !pessoaPassa) return false;
-    if(index < 0 || index >= pLista->tamanhoDaLista) return false;
+Pessoa ListaRetiraMeio(Lista *pLista, int pessoa_id){
+    if(!pLista) return NULL;
 
     //vou buscar a que eu quero remover
-    Celula *anterior = pLista->cabeca;
+    Celula *atual = pLista->cabeca->proximo;
     
-    for(int j = 0; j < index; j++)
-        anterior = anterior->proximo;
-    //o anterior aponta para a célula antes da que vai sair
-    
+    while(atual != NULL && atual->pessoa->id != id){
+        atual = atual->proximo
+    }
     //vou remover o auxiliar
-    //(anterior->proximo)->proximo
-    //(a anterior a que eu quero)->(a que eu quero)
-    Celula *auxiliar = anterior->proximo;//agora auxiliar é a que tá meu valor buscado
-    anterior->proximo = auxiliar->proximo;
+    //(atual->proximo)->proximo
+    //(a atual a que eu quero)->(a que eu quero)
+    Celula *auxiliar = atual->proximo;//agora atual é a que tá meu valor buscado
+    atual->proximo = auxiliar->proximo;
     //anteriror aponta pra onde auxilair ta apontando
-    *pessoaPassa = auxiliar->pessoa;//salvo a pessoa que vou remover
+    *pessoaPassa = atual->pessoa;//salvo a pessoa que vou remover
     free(auxiliar);
     
     if(index == pLista->tamanhoDaLista-1)
-        pLista->ultima = anterior;
+        pLista->ultima = atual;
     
     pLista->tamanhoDaLista--;
     return true;
 }
 
 //bool retorna bool
-bool ListaRemoveInicio(Lista *pLista, int indice, Pessoa *pessoa){
+bool ListaRemoveInicio(Lista *pLista, Pessoa *pessoa){
     return ListaRetiraMeio(pLista, 0, pessoa);
 }
 
-bool ListaRemoveFim(Lista *pLista, int indice, Pessoa *pessoa){
-    return ListaRetiraMeio(pLista, pLista->tamanhoDaLista, pessoa);
+bool ListaRemoveFim(Lista *pLista, Pessoa *pessoa){
+    return ListaRetiraMeio(pLista, pessoa->id);
 }
