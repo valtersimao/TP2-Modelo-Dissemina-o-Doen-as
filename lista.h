@@ -3,10 +3,19 @@
 
 //cada uma das simulações deve guardar uma pessoa
 #include "pessoa.h"
+#include <stdbool.h>
 
-typedef struct lista Lista;
+typedef struct celula {
+    struct celula *proximo;
+    Pessoa *pessoa;
+} Celula;
 
-Lista *ListaCria(Pessoa *pPessoa);
+typedef struct lista {
+    int tamanhoDaLista;
+    Celula *cabeca, *ultima;
+} Lista;
+
+Lista *ListaCria();
 Lista *ListaDestroi(Lista *pLista);
 bool ListaEsvazia(Lista *pLista);
 bool ListaEhVazia(Lista *pLista);

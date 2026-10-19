@@ -29,4 +29,6 @@ Pessoa *PessoaDestroi(Pessoa *pPessoa){
     if(!pPessoa) return NULL;
     free(pPessoa->nome);
     free(pPessoa);
+
+    return NULL;//pq eh do tipo pessoa precisa retornar
 }

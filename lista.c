@@ -1,16 +1,6 @@
 #include "lista.h"
 #include <stdlib.h>
 
-typedef struct celula {
-    struct celula *proximo;
-    Pessoa *pessoa;
-} Celula;
-
-struct lista {
-    int tamanhoDaLista;
-    Celula *cabeca, *ultima;
-};
-
 Lista *ListaCria(){
     Lista *pLista = (Lista*) malloc(sizeof(Lista));
     if(!pLista) return NULL;
@@ -45,7 +35,7 @@ bool ListaEsvazia(Lista *pLista){
     //reiniciar a lista toda agora
     pLista->cabeca->proximo = NULL;
     pLista->ultima = pLista->cabeca;
-    pLista->tamanhoDaLisa = 0;
+    pLista->tamanhoDaLista = 0;
 
     return true;
 }

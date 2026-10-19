@@ -1,7 +1,7 @@
 #ifndef ORDENACAO_H
 #define ORDENACAO_H
 
-#include "stdboll.h"
+#include <stdboll.h>
 #include "lista.h"
 #include "pessoa.h"
 
