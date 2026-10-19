@@ -1,4 +1,4 @@
-#include <parametros.h>
+#include "simulacao.h"
 
 void SimulacaoArquivoTexto(Pessoa **pPessoa){
     FILE *arquivoTexto;
