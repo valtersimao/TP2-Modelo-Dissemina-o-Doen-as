@@ -19,7 +19,7 @@ Lista *ListaCria();
 Lista *ListaDestroi(Lista *pLista);
 bool ListaEsvazia(Lista *pLista);
 bool ListaEhVazia(Lista *pLista);
-bool ListaInsereInicio(Lista *pLista, Pessoa *pPessoa);
+bool ListaInsere(Lista *pLista, Pessoa *pPessoa);
 
 Pessoa *ListaRetiraMeio(Lista *pLista, int pessoa_id);
 Pessoa *ListaRemoveInicio(Lista *pLista);
