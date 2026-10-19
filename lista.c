@@ -68,7 +68,7 @@ bool ListaEhVazia(Lista *pLista){
     return false;
 }
 
-bool ListaInsere(Lista *pLista, Pessoa *pPessoa){
+bool ListaInsereFim(Lista *pLista, Pessoa *pPessoa){
     if(!pLista) return false;
     if(!pPessoa) return false;
 

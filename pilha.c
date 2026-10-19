@@ -1,31 +1,48 @@
 #include "pilha.h"
 #include <stdlib.h>
 
-struct {
-    Celula *cabeca;
+typedef struct {
+    Lista * lista; //Utilizar tudo já implementado na lista
 } Pilha;
 
-Pilha *PilhaInicia(){
-    Pilha *pilha = (Pilha*) malloc(sizeof(Pilha));
-    if(!pilha) return NULL;
-    pilha->cabeca = (Celula*) malloc(sizeof(Celula));
-    if(!pilha->cabeca){
+Pilha *PilhaInicia() {
+    Pilha *pilha = malloc(sizeof(Pilha));
+
+    if (pilha == NULL)
+        return NULL;
+
+
+    pilha->lista = ListaCria();
+
+    if (pilha->lista == NULL) {
         free(pilha);
-        pilha = NULL;
-        return pilha;
+        return NULL;
     }
-    pilha->cabeca->proximo = NULL;
+
     return pilha;
 }
 
-Pilha *PilhaLibera(Pilha *pilha){
-    if(!pilha) return NULL;
-    ListaLibera(pilha);
-    free(pilha->cabeca);
+void PilhaLibera(Pilha *pilha) {
+    if (pilha == NULL) {
+        return;
+    }
+
+    ListaEsvazia(pilha->lista);
     free(pilha);
-    return NULL;
 }
 
-bool PilhaPush(Pilha *pilha, Pessoa *pessoa){
-
+bool PilhaEhVazia(Pilha *pilha) {
+    if(pilha == NULL) return true;
+    return ListaEhVazia(pilha->lista);
 }
+
+//o último elemento inserido é o primeiro a sair
+//estamos inserindo no início da lista, que representa o topo da pilha.
+
+bool PilhaInsere(Pilha *pilha, Pessoa *pessoa) { 
+    if(pilha == NULL) return false;
+
+    return ListaInsereInicio(pilha->lista, pessoa);
+}
+
+bool PilhaRemove(Pilha *pilha, Pessoa *pessoa);

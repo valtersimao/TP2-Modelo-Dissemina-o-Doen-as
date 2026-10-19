@@ -15,6 +15,6 @@ True se pessa1 ttem prioridade (vem antes na lsita).
 - Se empatou a idade, True para o de menor ID.
 */
 bool VerificaPriori(Pessoa *pessoa1, Pessoa *pessoa2);
-void AlgoritmoOrdenacaoMerge(Lista *pLista);
+void OrdenaMerge(Lista *pLista);
 
 #endif

@@ -92,7 +92,7 @@ Celula *RecursaoMerge(Celula *cabeca){
 }
 //já vem da lista direto pra ca
 //Dividir pra Conquistar 
-void AlgoritmoOrdenacaoMerge(Lista *pLista){//TÁ NO .H
+void OrdenaMerge(Lista *pLista){//TÁ NO .H
     if(!pLista || pLista->tamanhoDaLista < 2) return;
     //se a lista tiver só 1 elemento, ela já tá ordenada
 
