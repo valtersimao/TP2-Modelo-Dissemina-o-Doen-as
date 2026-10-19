@@ -16,12 +16,12 @@ bool VerificaPriori(Pessoa *pessoa1, Pessoa *pessoa2){
     return false;//não ocorre a troca
 }
 
-//achar o meio da lista
-Celula *dividirLista(Celula *cabeca){
+//achar o meio da lista e retorna meu ponteiro pra SEGUNDA METD..
+Celula *DividirLista(Celula *cabeca){
     if(!cabeca) return NULL;
 
-    Cabeca *lentinho = cabeca;
-    Cabeca *rapidinho = cabeca->proximo;
+    Celula *lentinho = cabeca;
+    Celula *rapidinho = cabeca->proximo;
     while(rapidinho !=NULL && rapidinho->proximo != NULL){
         lentinho = lentinho->proximo;
         rapidinho = rapidinho->proximo->proximo;
@@ -36,14 +36,64 @@ Celula *dividirLista(Celula *cabeca){
     return metade2;
 }
 
-Celula *IntercalaListas(Celula *A, Celula *B){
-    
+//juntar as listas em uma nova lista ordenda
+Celula *IntercalaListas(Celula *metade1, Celula *metade2){
+    //se alguma das 2 for NULA, retorno a outra pra não perder o resto
+    if(!metade1) return metade2;
+    if(!metade2) return metade1;
+
+    //facilitar a forma de conectar as 2 partes
+    Celula cabecaTemp;
+    cabeca.proximo = NULL;
+    Celula *atual = &cabecaTemp;//aponta pro ultimo elemento
+
+    /*o 'atual' forma a minha lista, as metades são
+    inseridas conforme o critério de prioridades*/
+
+    while(metade1 != NULL && metade2 != NULL){//vai rodar enquanto as listas ainda tiverem elem.
+        if(VerificaPriori(metade1->pessoa, metade2->pessoa)){//se pessoa da metade 1 se adequar
+            atual->proximo = metade1;//CELULAS  
+            metade1 = metade1->proximo;//ELEMENTOS DA METADE DA LISTA
+        }else{//se pessoa da metade 1 não se adequar
+            atual->proximo = metade2;
+            metade2 = metade2->proximo;
+        }
+        //andando na lista
+        atual = atual->proximo;
+    }
+
+    if(metade1 != NULL){//se ainda estiver sobrando na PRIMEIRA metade
+        atual->proximo = metade1;
+    } else {//se ainda estiver sobrando na SEGUNDA metade
+        atual->proximo = metade2;
+    }
+
+    //RETORNA O INÍCIO com a lista já ordenada
+    return cabecaTemp.proximo;//aponta pro primeiro pós cabeça
 }
 
+Celula *RecursaoMerge(Celula *cabeca){
+    if(!cabeca) return cabeca;
+    if(!cabeca->proximo) return cabeca;//a cabeça pode ter apenas 1 elem.
+
+
+    //DIVIDIR PARA..
+    //trás o ponteiro pro meu primeiro elemento da segunda metdade
+    Celula *inicioMetade2 = DividirLista(cabeca);
+
+    //CONQUISTAR
+    Celula *pegaMetade1 = RecursaoMerge(cabeca);
+    //passando o ponteiro pra primeira metade dnvv
+
+    Celula *pegaMetade2 = RecursaoMerge(inicioMetade2);//"cabeca" da segunda parte
+
+    //juntando tudo e retornando as 2 jntas
+    return IntercalaListas(pegaMetade1, pegaMetade2);
+}
 //já vem da lista direto pra ca
 //Dividir pra Conquistar 
 void AlgoritmoOrdenacaoMerge(Lista *pLista){
-    if(!pLista || pLista->tamanhaDaLista < 2) return;
+    if(!pLista || pLista->tamanhoDaLista < 2) return;
     //se a lista tiver só 1 elemento, ela já tá ordenada
 
     //Guarda o 1º elemento válido
@@ -57,5 +107,5 @@ void AlgoritmoOrdenacaoMerge(Lista *pLista){
         atual = atual->proximo;
     }
     //atualizaçao
-    pLista->ultimo atual;
+    pLista->ultimo = atual;
 }
