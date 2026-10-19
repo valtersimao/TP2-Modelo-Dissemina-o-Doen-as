@@ -10,7 +10,5 @@ void SimulacaoArquivoTexto(Pessoa **pPessoa){
         return;
     }
 
-    
-
     fclose(arquivoTexto);
 }

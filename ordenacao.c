@@ -2,7 +2,7 @@
 
 #include <stdlib.h>
 
-bool VerificaPriori(Pessoa *pessoa1, Pessoa *pessoa2){
+bool VerificaPriori(Pessoa *pessoa1, Pessoa *pessoa2){//TÁ NO .H
     if(!pessoa1 || !pessoa2) return false;
 
     if(pessoa1->idade > pessoa2->idade){
@@ -44,7 +44,7 @@ Celula *IntercalaListas(Celula *metade1, Celula *metade2){
 
     //facilitar a forma de conectar as 2 partes
     Celula cabecaTemp;
-    cabeca.proximo = NULL;
+    cabecaTemp.proximo = NULL;
     Celula *atual = &cabecaTemp;//aponta pro ultimo elemento
 
     /*o 'atual' forma a minha lista, as metades são
@@ -92,13 +92,13 @@ Celula *RecursaoMerge(Celula *cabeca){
 }
 //já vem da lista direto pra ca
 //Dividir pra Conquistar 
-void AlgoritmoOrdenacaoMerge(Lista *pLista){
+void AlgoritmoOrdenacaoMerge(Lista *pLista){//TÁ NO .H
     if(!pLista || pLista->tamanhoDaLista < 2) return;
     //se a lista tiver só 1 elemento, ela já tá ordenada
 
     //Guarda o 1º elemento válido
     Celula *primeiraPessoa = pLista->cabeca->proximo;
-    Celula *ordenaNovaCabeca = RecursaoMegre(primeiraPessoa);
+    Celula *ordenaNovaCabeca = RecursaoMerge(primeiraPessoa);
 
     //atualizar o ponteiro que aponta pro ultimo
     pLista->cabeca->proximo = ordenaNovaCabeca;//reconecta a lista na cauda depois de ordenada
@@ -107,5 +107,5 @@ void AlgoritmoOrdenacaoMerge(Lista *pLista){
         atual = atual->proximo;
     }
     //atualizaçao
-    pLista->ultimo = atual;
+    pLista->ultima = atual;
 }
