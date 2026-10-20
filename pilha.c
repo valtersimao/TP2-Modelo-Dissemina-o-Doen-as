@@ -45,4 +45,6 @@ bool PilhaInsere(Pilha *pilha, Pessoa *pessoa) {
     return ListaInsereInicio(pilha->lista, pessoa);
 }
 
-bool PilhaRemove(Pilha *pilha, Pessoa *pessoa);
+bool PilhaRemove(Pilha *pilha, Pessoa *pessoa){
+    
+}

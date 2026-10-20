@@ -156,10 +156,10 @@ Pessoa *ListaRemoveFim(Lista *pLista){
         atual = atual->proximo;
     }
 
-    anterior->proximo = NULL;//o que anterior aponta fica com NULL (no caso o atual)
+    anterior->proximo = NULL;//faz anterior apontar para NULL, desligando atual da lista.
     pLista->ultima = anterior;//apontando o ultimo pro anterior ao que foi removido
     
-    Pessoa *pessoaRemovida = atual->pessoa;//essa é a que eu removi da lista (desreferenciei ela)
+    Pessoa *pessoaRemovida = atual->pessoa;//essa é a que eu removi da lista (copiei o valor do ponteiro)
     free(atual);//liberei
 
     pLista->tamanhoDaLista--;
