@@ -30,6 +30,18 @@ void *OrdenaInsertion(Lista *pLista){
     
     Celula *anterior = &cabecaTemp;
     Celula *proximoAtual = atual->proximo;
+
+    
+    /*OrdenaMerge pode ser util para atualizar a ultima posição:
+    //atualizar o ponteiro que aponta pro ultimo
+    pLista->cabeca->proximo = ordenaNovaCabeca;//reconecta a lista na cauda depois de ordenada
+    Celula *atual = ordenaNovaCabeca;
+    while(atual != NULL && atual->proximo != NULL){
+        atual = atual->proximo;
+    }
+    //atualizaçao
+    pLista->ultima = atual;
+    */
 }
 
 //achar o meio da lista e retorna meu ponteiro pra SEGUNDA METD..
