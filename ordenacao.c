@@ -16,6 +16,22 @@ bool VerificaPriori(Pessoa *pessoa1, Pessoa *pessoa2){//TÁ NO .H
     return false;//não ocorre a troca
 }
 
+////já vem da lista direto pra ca
+void *OrdenaInsertion(Lista *pLista){
+    if(!cabeca) return;
+    if(!pLista->cabeca->pessoa) return;
+
+    //Guarda o 1º elemento válido (m esquerda)
+    Celula *atual = pLista->cabeca->proximo;
+
+    //(m direita)
+    Celula cabecaTemp;
+    cabecaTemp.proximo = NULL;
+    
+    Celula *anterior = &cabecaTemp;
+    Celula *proximoAtual = atual->proximo;
+}
+
 //achar o meio da lista e retorna meu ponteiro pra SEGUNDA METD..
 Celula *DividirLista(Celula *cabeca){
     if(!cabeca) return NULL;
