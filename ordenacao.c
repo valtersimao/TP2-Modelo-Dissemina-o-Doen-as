@@ -16,22 +16,32 @@ bool VerificaPriori(Pessoa *pessoa1, Pessoa *pessoa2){//TÁ NO .H
     return false;//não ocorre a troca
 }
 
-////já vem da lista direto pra ca
-void *OrdenaInsertion(Lista *pLista){
-    if(!cabeca) return;
+////já vem da lista direto pra cá
+void OrdenaInsertion(Lista *pLista){
+    if(!pLista || pLista->tamanhhoDaLista < 2) return;
     if(!pLista->cabeca->pessoa) return;
 
-    //Guarda o 1º elemento válido (m esquerda)
-    Celula *atual = pLista->cabeca->proximo;
+    //Guarda o 1º elemento valido (mao esquerda)
+    Celula *atual = pLista->cabeca->proximo;//antecessor de porximoAtual
+    //pra percorrer a lista original
 
-    //(m direita)
+    //Cabeça falsa (mao direita)
     Celula cabecaTemp;
     cabecaTemp.proximo = NULL;
-    
+    //elementos para trabalhar na minha lista falsa
     Celula *anterior = &cabecaTemp;
-    Celula *proximoAtual = atual->proximo;
+    Celula *proximoAtual;//guardar o proximo apos o atual antes de mexer nele
+    Celula *busca;
 
-    
+    while(atual != NULL){//percorrer a minha lista original
+        proximoAtual = atual->proximo;//guardando
+        //pra cada atual é preciso saber onde será sua poisção na lista
+        //conforme a regra de inserção
+        anterior = &cabecaTemp;
+        busca = cabecaTemp.proximo;//andando na lista falsa e guardando o anterior
+    }
+
+
     /*OrdenaMerge pode ser util para atualizar a ultima posição:
     //atualizar o ponteiro que aponta pro ultimo
     pLista->cabeca->proximo = ordenaNovaCabeca;//reconecta a lista na cauda depois de ordenada
