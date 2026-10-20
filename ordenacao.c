@@ -18,18 +18,19 @@ bool VerificaPriori(Pessoa *pessoa1, Pessoa *pessoa2){//TÁ NO .H
 
 ////já vem da lista direto pra cá
 void OrdenaInsertion(Lista *pLista){
-    if(!pLista || pLista->tamanhhoDaLista < 2) return;
-    if(!pLista->cabeca->pessoa) return;
+    if(!pLista || pLista->tamanhoDaLista < 2) return;
+    if(!pLista->cabeca->proximo) return;//verificar se o primeiro é NULL
 
     //Guarda o 1º elemento valido (mao esquerda)
     Celula *atual = pLista->cabeca->proximo;//antecessor de porximoAtual
     //pra percorrer a lista original
 
     //Cabeça falsa (mao direita)
-    Celula cabecaTemp;
-    cabecaTemp.proximo = NULL;
+    Celula cabecaSecond;
+    cabecaSecond.proximo = NULL;
+
     //elementos para trabalhar na minha lista falsa
-    Celula *anterior = &cabecaTemp;
+    Celula *anterior = &cabecaSecond;
     Celula *proximoAtual;//guardar o proximo apos o atual antes de mexer nele
     Celula *busca;
 
@@ -37,21 +38,33 @@ void OrdenaInsertion(Lista *pLista){
         proximoAtual = atual->proximo;//guardando
         //pra cada atual é preciso saber onde será sua poisção na lista
         //conforme a regra de inserção
-        anterior = &cabecaTemp;
-        busca = cabecaTemp.proximo;//andando na lista falsa e guardando o anterior
+        anterior = &cabecaSecond;
+        busca = cabecaSecond.proximo;//andando na lista falsa e guardando o anterior
+        
+        //enquanto a nova lista não finalizar e
+        //a Verificação ainda receber células com pessoas válidas
+        while(busca != NULL && VerificaPriori(busca->pessoa, atual->pessoa)){//pessoa da secundaria e pessoa da original
+            //laço ordenando com base na regra papae [se a pessoa de busca tem prioridade]
+            anterior = busca;//ordena o de prioridade antes do menos prioritário
+            busca = busca->proximo;//anda para a próxima célula da lista secundária até a da atual for prioridade
+        }//agora, o anterior[que recebeu busca] fica na célula depois da que a atual vai ficar
+
+        //agora é só passar pra la [inserir o atual entre o anterior e o busca]
+        atual->proximo = busca;//atual vai apontar pra da frente dele [pq busca ta depois]
+        anterior->proximo = atual;
+
+        //continuar avançando uma célula na originial
+        atual = proximoAtual;//depois que eu guardei la em cima posso mexer aq embaixo
     }
 
-
-    /*OrdenaMerge pode ser util para atualizar a ultima posição:
-    //atualizar o ponteiro que aponta pro ultimo
-    pLista->cabeca->proximo = ordenaNovaCabeca;//reconecta a lista na cauda depois de ordenada
-    Celula *atual = ordenaNovaCabeca;
-    while(atual != NULL && atual->proximo != NULL){
-        atual = atual->proximo;
+    /*atualizar o ponteiro que aponta pro ultimo*/
+    pLista->cabeca->proximo = cabecaSecond.proximo;//reconecta a lista original no primeiro elemento na cabeça da ordenda secundária
+    Celula *conectaCabeca = cabecaSecond.proximo;//poderia ser 'pLista->cabeca->proximo' tbm
+    while(conectaCabeca != NULL && conectaCabeca->proximo != NULL){
+        conectaCabeca = conectaCabeca->proximo;
     }
     //atualizaçao
-    pLista->ultima = atual;
-    */
+    pLista->ultima = conectaCabeca;
 }
 
 //achar o meio da lista e retorna meu ponteiro pra SEGUNDA METD..
@@ -81,9 +94,9 @@ Celula *IntercalaListas(Celula *metade1, Celula *metade2){
     if(!metade2) return metade1;
 
     //facilitar a forma de conectar as 2 partes
-    Celula cabecaTemp;
-    cabecaTemp.proximo = NULL;
-    Celula *atual = &cabecaTemp;//aponta pro ultimo elemento
+    Celula cabecaSecond;
+    cabecaSecond.proximo = NULL;
+    Celula *atual = &cabecaSecond;//aponta pro ultimo elemento
 
     /*o 'atual' forma a minha lista, as metades são
     inseridas conforme o critério de prioridades*/
@@ -107,13 +120,12 @@ Celula *IntercalaListas(Celula *metade1, Celula *metade2){
     }
 
     //RETORNA O INÍCIO com a lista já ordenada
-    return cabecaTemp.proximo;//aponta pro primeiro pós cabeça
+    return cabecaSecond.proximo;//aponta pro primeiro pós cabeça
 }
 
 Celula *RecursaoMerge(Celula *cabeca){
     if(!cabeca) return cabeca;
     if(!cabeca->proximo) return cabeca;//a cabeça pode ter apenas 1 elem.
-
 
     //DIVIDIR PARA..
     //trás o ponteiro pro meu primeiro elemento da segunda metdade
