@@ -1,7 +1,6 @@
 #include "pessoa.h"
 
 #include <stdlib.h>
-#include <string.h>
 
 //Pegar as infos do aqruivo
 Pessoa *PessoaCria(int id, int idade, char *nome){

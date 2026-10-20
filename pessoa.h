@@ -1,6 +1,8 @@
 #ifndef PESSOA_H
 #define PESSOA_H
 
+#include <string.h>
+
 typedef struct {
     int id;
     int idade;

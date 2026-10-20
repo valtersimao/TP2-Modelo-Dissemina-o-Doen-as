@@ -66,3 +66,28 @@ void OrdenaInsertion(Lista *pLista){
     //atualizaçao
     pLista->ultima = conectaCabeca;
 }
+
+void InsereOrdenado(Lista *pLista, Pessoa *pPessoa){
+    if(!pLista || !pPessoa) return;
+
+    Celula *nova = (Celula*) malloc(sizeof(Celula));
+    if(!nova) return;
+
+    nova->pessoa = pPessoa;//passa a pessoa pra nova celula criada
+    nova->proximo = NULL;
+    Celula *anterior = pLista->cabeca;//guarda a anterior começando na cabeça
+    Celula *atual = pLista->cabeca->proximo;//ponteiro pra andar na lista
+
+    while(atual != NULL && VerificaPriori(atual->pessoa, pPessoa)){//se o que está na lista tem prioridade sobre a nova pessoa
+        anterior = atual;
+        atual = atual->proximo;
+    }//se for false o while sai [pessoa nova é mais velha ou possui id menor]
+    //agora, a 'anterior' aponta pra célula que deve vir antes na 'nova' e 'atual' vem depois
+    nova->proximo = atual;//a nova aponta para a que foi comparada da lista original
+    anterior->proximo = nova;//anterior agora aponta pra nova inserida
+
+    pLista->tamanhoDaLista++;//inserção
+    //se caso a atual for a última
+    if(atual == NULL)   
+        pLIsta->ultima = atual;//o ponteiro pra ultima é atualizado
+}

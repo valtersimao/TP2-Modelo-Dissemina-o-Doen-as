@@ -11,9 +11,13 @@ True se pessa1 ttem prioridade (vem antes na lsita).
 - Se empatou a idade, True para o de menor ID.
 */
 bool VerificaPriori(Pessoa *pessoa1, Pessoa *pessoa2);
+
+
+void OrdenaInsertion(Lista *pLista);
+
 /*Função que faz o trabalho de ordenaçao
 (se alguem se curar e voltar pro Estado 1).
 */
-void OrdenaInsertion(Lista *pLista);
+void InsereOrdenado(Lista *pLista, Pessoa *pPessoa);
 
 #endif
