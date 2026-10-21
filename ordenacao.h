@@ -12,7 +12,12 @@ True se pessa1 ttem prioridade (vem antes na lsita).
 */
 bool VerificaPriori(Pessoa *pessoa1, Pessoa *pessoa2);
 
-
+/*Função pra ordenar todas as pessoas do .txt
+Escolhemos o Inserction por que se tivéssemos feito no Merge
+(que foi a ideia inicial) poderia ocorrer muito mais
+processamento mesmo que o .txt tivesse todo favorável
+á condição de prioridade - lista ordenada.
+*/
 void OrdenaInsertion(Lista *pLista);
 
 /*Função que faz o trabalho de ordenaçao

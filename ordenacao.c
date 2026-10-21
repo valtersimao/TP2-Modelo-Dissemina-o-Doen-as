@@ -16,7 +16,7 @@ bool VerificaPriori(Pessoa *pessoa1, Pessoa *pessoa2){//TÁ NO .H
     return false;//não ocorre a troca
 }
 
-////já vem da lista direto pra cá
+////já vem da lista toda direto pra cá
 void OrdenaInsertion(Lista *pLista){
     if(!pLista || pLista->tamanhoDaLista < 2) return;
     if(!pLista->cabeca->proximo) return;//verificar se o primeiro é NULL
