@@ -88,6 +88,26 @@ bool ListaInsereFim(Lista *pLista, Pessoa *pPessoa){
     return true;
 }
 
+bool ListaInsereInicio(Lista *pLista, Pessoa *pPessoa){
+    if(!pLista) return false;
+    if(!pPessoa)  return false;
+
+    Celula *nova = malloc(sizeof(Celula));
+    if(!nova) return false;
+    
+    nova->pessoa = pPessoa;
+
+    //momento de troca (simples)
+    nova->proximo = pLista->cabeca->proximo;
+    pLista->cabeca->proximo = nova;
+
+    if(nova->proximo == NULL)
+        pLista->ultimo = nova;
+    
+    pLista->tamanhoDaLista++;
+    return true;
+}
+
 /*
 FILA - O index vai ser sempre 0 pra REMOÇÃO FIFO
 PILHA - O index vai ser sempre o tamanho da lista
@@ -122,7 +142,6 @@ Pessoa *ListaRetiraMeio(Lista *pLista, int pessoa_id){
     return pessoaRemovida;//por isso que é do tipo 'Pessoa'
 }
 
-//bool retorna bool
 Pessoa *ListaRemoveInicio(Lista *pLista){
     if(!pLista) return NULL;
     //remover a primeira
