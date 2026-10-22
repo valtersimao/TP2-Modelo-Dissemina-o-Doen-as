@@ -1,9 +1,7 @@
 #include "pilha.h"
-#include <stdlib.h>
 
-typedef struct {
-    Lista * lista; //Utilizar tudo já implementado na lista
-} Pilha;
+#include "lista.h"
+#include <stdlib.h>
 
 Pilha *PilhaInicia() {
     Pilha *pilha = malloc(sizeof(Pilha));
@@ -45,6 +43,8 @@ bool PilhaInsere(Pilha *pilha, Pessoa *pessoa) {
     return ListaInsereInicio(pilha->lista, pessoa);
 }
 
-bool PilhaRemove(Pilha *pilha, Pessoa *pessoa){
-    
+Pessoa * PilhaRemove(Pilha *pilha){
+    if(pilha == NULL) return false;
+
+    return ListaRemoveInicio(pilha->lista);
 }

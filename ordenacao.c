@@ -89,5 +89,5 @@ void InsereOrdenado(Lista *pLista, Pessoa *pPessoa){
     pLista->tamanhoDaLista++;//inserção
     //se caso a atual for a última
     if(atual == NULL)   
-        pLIsta->ultima = atual;//o ponteiro pra ultima é atualizado
+        pLista->ultima = atual;//o ponteiro pra ultima é atualizado
 }

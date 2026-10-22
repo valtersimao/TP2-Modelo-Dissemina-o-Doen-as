@@ -6,6 +6,6 @@
 #include "pilha.h"
 #include "parametros.h"
 
-void SimulacaoArquivoTexto(Pessoa **pPessoa);
+
 
 #endif //SIMULACAO_H

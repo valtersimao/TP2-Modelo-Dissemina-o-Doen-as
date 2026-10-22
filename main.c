@@ -4,9 +4,14 @@
 //função que é necessária pra usar o tipo 'uint32_t'
 #include <stdint.h>
 
+
 #include "pessoa.h"
 #include "parametros.h"
 #include "simulacao.h"
+#include "ordenacao.h"
+#include "fila.h"
+#include "pilha.h"
+#include "lista.h"
 
 static uint32_t xorshift32(void) {
     static uint32_t state = 12345;
@@ -27,19 +32,24 @@ static int sorteia(int prob) {
     return valor_sorteado < prob;
 }
 
-//Utilize o código abaixo para verificar se a função fornecida de fato funcionará conforme esperado.
+int main( ) {
+    //Ler pessoas
+    int nPessoas = 1000;
+    Lista * pessoasEstado1 = ListaCria();
+    if(pessoasEstado1 == NULL) printf("Erro ao criar Lista de pessoas no estado 1");
 
-int main(){
+    for (int i = 0; i < nPessoas; i++) {
+        char * nome;
+        int id, idade;
+    
+        scanf("%s %d %d", nome, &id, &idade);
 
-        
+        Pessoa *p = PessoaCria(id, idade, nome);
 
-    // for(int i = 0; i < 20; i++){
-    //     int valor_sorteado = (int)(xorshift32() % 100u);
-    //     printf("%d", valor_sorteado);
-    //     if(i < 20-1)
-    //         printf(",");
-    // }
-    // printf("\n");
+        if (p == NULL) printf("Erro ao criar pessoa %d", id);
 
+        InsereOrdenado(pessoasEstado1, p);
+    }
+    
     return 0;
 }

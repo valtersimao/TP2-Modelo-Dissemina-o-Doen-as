@@ -1,14 +1,5 @@
 #include "simulacao.h"
 
-void SimulacaoArquivoTexto(Pessoa **pPessoa){
-    FILE *arquivoTexto;
+void SimulacaoArquivoTexto(){
     
-    arquivoTexto = fopen("pessoa.txt");
-    //verificação depois de abrir
-    if(!arquivo){
-        printf("\nERRO AO ABRIR A LISTA DE PESSOAS\n");
-        return;
-    }
-
-    fclose(arquivoTexto);
 }
