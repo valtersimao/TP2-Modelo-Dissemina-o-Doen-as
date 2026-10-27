@@ -1,6 +1,8 @@
 #include "pessoa.h"
 
 #include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 
 //Pegar as infos do aqruivo
 Pessoa *PessoaCria(int id, int idade, char *nome){
@@ -30,4 +32,8 @@ Pessoa *PessoaDestroi(Pessoa *pPessoa){
     free(pPessoa);
 
     return NULL;//pq eh do tipo pessoa precisa retornar
+}
+
+void PessoaPrint(Pessoa *pPessoa) {
+    printf("%d\t%s\t%d anos\n", pPessoa->id, pPessoa->nome, pPessoa->idade);
 }

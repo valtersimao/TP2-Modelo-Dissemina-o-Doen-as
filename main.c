@@ -32,17 +32,23 @@ static int sorteia(int prob) {
     return valor_sorteado < prob;
 }
 
+void limpar_buffer(void) {
+    int c = 0;
+    while ((c = getchar()) != '\n' && c != EOF) {}
+}
+
 int main( ) {
     //Ler pessoas
-    int nPessoas = 1000;
+    int nPessoas = 100;
     Lista * pessoasEstado1 = ListaCria();
     if(pessoasEstado1 == NULL) printf("Erro ao criar Lista de pessoas no estado 1");
 
     for (int i = 0; i < nPessoas; i++) {
-        char * nome;
+        char nome[100];
         int id, idade;
     
         scanf("%s %d %d", nome, &id, &idade);
+        limpar_buffer();
 
         Pessoa *p = PessoaCria(id, idade, nome);
 
@@ -50,6 +56,13 @@ int main( ) {
 
         InsereOrdenado(pessoasEstado1, p);
     }
+    printf("inserido!\n");
     
+    for (int i = 0; i < pessoasEstado1->tamanhoDaLista; i++)
+    {
+        PessoaPrint(ListaRemoveInicio(pessoasEstado1));
+    }
+    
+
     return 0;
 }

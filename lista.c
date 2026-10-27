@@ -102,7 +102,7 @@ bool ListaInsereInicio(Lista *pLista, Pessoa *pPessoa){
     pLista->cabeca->proximo = nova;
 
     if(nova->proximo == NULL)
-        pLista->ultimo = nova;
+        pLista->ultima = nova;
     
     pLista->tamanhoDaLista++;
     return true;

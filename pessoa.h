@@ -11,5 +11,6 @@ typedef struct {
 
 Pessoa *PessoaCria(int id, int idade, char *nome);
 Pessoa *PessoaDestroi(Pessoa *pPessoa);
+void PessoaPrint(Pessoa *pPessoa);
 
 #endif
