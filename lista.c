@@ -82,7 +82,7 @@ bool ListaInsereFim(Lista *pLista, Pessoa *pPessoa){
 
     Celula *auxiliar = pLista->ultima;
     nova->proximo = auxiliar->proximo;
-    auxiliar->proximo = nova;//só no caso de ter um ponteiro pra ultima
+    auxiliar->proximo = nova; //no caso de ter um ponteiro para ultima
     
     pLista->tamanhoDaLista++;
     return true;
