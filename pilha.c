@@ -19,7 +19,7 @@ Pilha *PilhaInicia() {
 
     return pilha;
 }
-
+/*
 void PilhaLibera(Pilha *pilha) {
     if (pilha == NULL) {
         return;
@@ -47,4 +47,4 @@ Evento * PilhaRemove(Pilha *pilha){
     if(pilha == NULL) return false;
 
     return ListaRemoveInicio(pilha->lista);
-}
+}*/

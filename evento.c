@@ -7,8 +7,8 @@ Evento EventoCria(int dia, Pessoa *pessoa, int estadoAnterior, int estadoAtual) 
 }
 
 void EventoPrint(Evento e) {
-    printf("[");
-    printf("DIA: %d | (");
+    printf("{");
+    printf("Dia: %d | [", e.dia);
     PessoaPrint(&e.pessoa);
-    printf(") | Estado %d -> Estado %d]\n", e.estadoAnterior, e.estadoAtual);
+    printf("] | Estado %d -> Estado %d}\n", e.estadoAnterior, e.estadoAtual);
 }
