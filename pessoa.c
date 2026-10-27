@@ -12,6 +12,10 @@ Pessoa *PessoaCria(int id, int idade, char *nome){
 
     int tamanhoNome = strlen(nome);
     pPessoa->nome = (char*) malloc(sizeof(char) * (tamanhoNome+1));// tamanhoNome+1 pra caber o '\0'
+    if(!pPessoa->nome){//verifica se alocou certinho
+        free(pPessoa);
+        return NULL;
+    }//depois alimenta a struct
     strcpy(pPessoa->nome, nome);
     
     pPessoa->id = id;
