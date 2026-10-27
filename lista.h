@@ -20,10 +20,10 @@ Lista *ListaDestroi(Lista *pLista);
 bool ListaEsvazia(Lista *pLista);
 bool ListaEhVazia(Lista *pLista);
 bool ListaInsereFim(Lista *pLista, Pessoa *pPessoa);
-bool ListaInsereInicio(Lista *pLista, Pessoa *pPessoa);
+bool ListaInsereInicio(Lista *pLista, void *pPessoa);
 
 Pessoa *ListaRetiraMeio(Lista *pLista, int pessoa_id);
-Pessoa *ListaRemoveInicio(Lista *pLista);
+void *ListaRemoveInicio(Lista *pLista);
 Pessoa *ListaRemoveFim(Lista *pLista);
 
 #endif

@@ -1,6 +1,5 @@
 #include "lista.h"
 #include <stdlib.h>
-
 Lista *ListaCria(){
     Lista *pLista = (Lista*) malloc(sizeof(Lista));
     if(!pLista) return NULL;
@@ -87,8 +86,8 @@ bool ListaInsereFim(Lista *pLista, Pessoa *pPessoa){
     pLista->tamanhoDaLista++;
     return true;
 }
-
-bool ListaInsereInicio(Lista *pLista, Pessoa *pPessoa){
+//algumas funções estão trabalhando com o tipo de ponteiro void para poder ser genérico com a pilha de Eventos
+bool ListaInsereInicio(Lista *pLista, void *pPessoa){
     if(!pLista) return false;
     if(!pPessoa)  return false;
 
@@ -142,7 +141,7 @@ Pessoa *ListaRetiraMeio(Lista *pLista, int pessoa_id){
     return pessoaRemovida;//por isso que é do tipo 'Pessoa'
 }
 
-Pessoa *ListaRemoveInicio(Lista *pLista){
+void *ListaRemoveInicio(Lista *pLista){
     if(!pLista) return NULL;
     //remover a primeira
     Celula *remover = pLista->cabeca->proximo;
@@ -153,7 +152,7 @@ Pessoa *ListaRemoveInicio(Lista *pLista){
     if(remover == pLista->ultima)//se o 1º for igual ao último
         pLista->ultima = pLista->cabeca;
     
-    Pessoa *pessoaRemovida = remover->pessoa;
+    void *pessoaRemovida = remover->pessoa;
     free(remover);
 
     pLista->tamanhoDaLista--;

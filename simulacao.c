@@ -24,7 +24,7 @@ void simular( Parametros parametros, Lista * listaPessoasInicio) {
         InsereOrdenado(ListaPessoasEstado[1], p);
         Evento e = EventoCria(0, p, 1, 2);
         EventoPrint(e);
-        //PilhaInsere(historicoEventos, &e);
+        PilhaInsere(historicoEventos, &e);
     }
     
 
