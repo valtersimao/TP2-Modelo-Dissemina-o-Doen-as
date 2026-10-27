@@ -36,9 +36,22 @@ static int sorteia(int prob) {
     return valor_sorteado < prob;
 }
 
+<<<<<<< HEAD
 Lista * lerListaPessoas(int nPessoas) {
     Lista * listaLida = ListaCria();
     if(listaLida == NULL) return NULL;
+=======
+void limpar_buffer(void) {
+    int c = 0;
+    while ((c = getchar()) != '\n' && c != EOF) {}
+}
+
+int main( ) {
+    //Ler pessoas
+    int nPessoas = 500;
+    Lista * pessoasEstado1 = ListaCria();
+    if(pessoasEstado1 == NULL) printf("Erro ao criar Lista de pessoas no estado 1");
+>>>>>>> 7b271c0 (atualizando dnv)
 
     for (int i = 0; i < nPessoas; i++) {
         char nome[100];
