@@ -44,7 +44,8 @@ void limpar_buffer(void) {
 int main( ) {
     //Ler pessoas
     int nPessoas = 500;
-    Lista * pessoasEstado1 = ListaCria();
+    Lista *pessoasEstado1 = ListaCria();
+    
     if(pessoasEstado1 == NULL) printf("Erro ao criar Lista de pessoas no estado 1");
 
     for (int i = 0; i < nPessoas; i++) {
@@ -57,10 +58,10 @@ int main( ) {
 
         if (p == NULL) printf("Erro ao criar pessoa %d", id);
 
-        InsereOrdenado(listaLida, p);
+        InsereOrdenado(pessoasEstado1, p);
     }
     
-    return listaLida;
+    return pessoasEstado1;
 }
 
 int main( ) {

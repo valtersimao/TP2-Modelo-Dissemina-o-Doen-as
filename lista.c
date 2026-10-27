@@ -77,7 +77,7 @@ bool ListaInsereFim(Lista *pLista, Pessoa *pPessoa){
 
     nova->pessoa = pPessoa;
 
-    nova->prox = pLista->ultima->proximo;
+    nova->proximo = pLista->ultima->proximo;
     pLista->ultima->proximo = nova;
     pLista->ultima = nova;
     

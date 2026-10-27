@@ -22,7 +22,7 @@ void OrdenaInsertion(Lista *pLista) { //O(n²) no pior caso
     if(!pLista->cabeca->proximo) return;//verificar se o primeiro é NULL
 
     //Guarda o 1º elemento valido (mao esquerda)
-    Celula *atual = pLista->cabeca->proximo;//antecessor de porximoAtual
+    Celula *atual = pLista->cabeca->proximo;//antecessor de proximoAtual
     //pra percorrer a lista original
 
     //Cabeça falsa (mao direita)
