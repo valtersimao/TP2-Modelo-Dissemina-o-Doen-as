@@ -1,7 +1,11 @@
+//PERGUNTAR O QUE É O I
+//CONFIRMAR ENTRADA DE DADOS
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-//função que é necessária pra usar o tipo 'uint32_t'
+
+//bilbioteca que é necessária pra usar o tipo 'uint32_t'
 #include <stdint.h>
 
 
@@ -32,37 +36,35 @@ static int sorteia(int prob) {
     return valor_sorteado < prob;
 }
 
-void limpar_buffer(void) {
-    int c = 0;
-    while ((c = getchar()) != '\n' && c != EOF) {}
-}
-
-int main( ) {
-    //Ler pessoas
-    int nPessoas = 100;
-    Lista * pessoasEstado1 = ListaCria();
-    if(pessoasEstado1 == NULL) printf("Erro ao criar Lista de pessoas no estado 1");
+Lista * lerListaPessoas(int nPessoas) {
+    Lista * listaLida = ListaCria();
+    if(listaLida == NULL) return NULL;
 
     for (int i = 0; i < nPessoas; i++) {
         char nome[100];
         int id, idade;
     
         scanf("%s %d %d", nome, &id, &idade);
-        limpar_buffer();
 
         Pessoa *p = PessoaCria(id, idade, nome);
 
         if (p == NULL) printf("Erro ao criar pessoa %d", id);
 
-        InsereOrdenado(pessoasEstado1, p);
-    }
-    printf("inserido!\n");
-    
-    for (int i = 0; i < pessoasEstado1->tamanhoDaLista; i++)
-    {
-        PessoaPrint(ListaRemoveInicio(pessoasEstado1));
+        InsereOrdenado(listaLida, p);
     }
     
+    return listaLida;
+}
+
+int main( ) {
+    //Ler pessoas
+    int N,P,L,K,F,M,D,R,Y,I;
+    scanf("%d %d %d %d %d %d %d %d %d %d", &N, &P, &L, &K, &F, &M, &D, &R, &Y, &I);
+    Parametros parametros = {N,P,L,K,F,M,D,R,Y,I};
+
+    Lista * pessoasInicio = lerListaPessoas(parametros.N);
+
+    simular(parametros, pessoasInicio);
 
     return 0;
 }

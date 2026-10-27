@@ -35,5 +35,5 @@ Pessoa *PessoaDestroi(Pessoa *pPessoa){
 }
 
 void PessoaPrint(Pessoa *pPessoa) {
-    printf("%d\t%s\t%d anos\n", pPessoa->id, pPessoa->nome, pPessoa->idade);
+    printf("%d:%s(%d anos)", pPessoa->id, pPessoa->nome, pPessoa->idade);
 }

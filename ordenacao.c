@@ -17,7 +17,7 @@ bool VerificaPriori(Pessoa *pessoa1, Pessoa *pessoa2){//TÁ NO .H
 }
 
 ////já vem da lista toda direto pra cá
-void OrdenaInsertion(Lista *pLista){
+void OrdenaInsertion(Lista *pLista) { //O(n²) no pior caso
     if(!pLista || pLista->tamanhoDaLista < 2) return;
     if(!pLista->cabeca->proximo) return;//verificar se o primeiro é NULL
 
@@ -67,7 +67,7 @@ void OrdenaInsertion(Lista *pLista){
     pLista->ultima = conectaCabeca;
 }
 
-void InsereOrdenado(Lista *pLista, Pessoa *pPessoa){
+void InsereOrdenado(Lista *pLista, Pessoa *pPessoa){ //O(n) no pior caso
     if(!pLista || !pPessoa) return;
 
     Celula *nova = (Celula*) malloc(sizeof(Celula));
@@ -89,5 +89,5 @@ void InsereOrdenado(Lista *pLista, Pessoa *pPessoa){
     pLista->tamanhoDaLista++;//inserção
     //se caso a atual for a última
     if(atual == NULL)   
-        pLista->ultima = atual;//o ponteiro pra ultima é atualizado
+        pLista->ultima = nova;//o ponteiro pra ultima é atualizado
 }

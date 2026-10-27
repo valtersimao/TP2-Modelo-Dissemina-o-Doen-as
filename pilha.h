@@ -2,7 +2,7 @@
 #define PILHA_H
 
 #include "lista.h"
-#include "pessoa.h"
+#include "evento.h"
 
 typedef struct {
     Lista * lista; //Utilizar tudo já implementado na lista
@@ -11,7 +11,7 @@ typedef struct {
 Pilha *PilhaInicia();
 void PilhaLibera(Pilha *pilha);
 bool PilhaEhVazia(Pilha *pilha);
-bool PilhaInsere(Pilha *pilha, Pessoa *pessoa);//ultimo elemento que entrou
-Pessoa * PilhaRemove(Pilha *pilha);//ultimo que entrou saiu primeiro
+bool PilhaInsere(Pilha *pilha, Evento *evento);//ultimo elemento que entrou
+Evento * PilhaRemove(Pilha *pilha);//ultimo que entrou saiu primeiro
 //insere onde acabou de remover e remove onde acabou de inserir
 #endif
