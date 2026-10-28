@@ -16,12 +16,15 @@ void simular( Parametros parametros, Lista * listaPessoasInicio) {
     for (int i = 1; i < 5; i++) { //inicializar cada Lista
         ListaPessoasEstado[i] = ListaCria();
     }
-    
 
+    //(nº de pessoas x percentual infectada no dia 0) / 100;
     int nInfectadosDia0 = (parametros.N * parametros.P) / 100;
+
     for (int i = 0; i < nInfectadosDia0; i++) {
         Pessoa *p = ListaRemoveInicio(ListaPessoasEstado[0]);
         InsereOrdenado(ListaPessoasEstado[1], p);
+
+        //cada evento é a transição de ESTADO da pessoa
         Evento e = EventoCria(0, p, 1, 2);
         EventoPrint(e);
         PilhaInsere(historicoEventos, &e);
