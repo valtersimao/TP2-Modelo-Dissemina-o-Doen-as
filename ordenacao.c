@@ -61,7 +61,7 @@ void OrdenaInsertion(Lista *pLista) { //O(n²) no pior caso
     pLista->cabeca->proximo = cabecaSecond.proximo;//reconecta a lista original no primeiro elemento na cabeça da ordenda secundária
     Celula *conectaCabeca = cabecaSecond.proximo;//poderia ser 'pLista->cabeca->proximo' tbm
     while(conectaCabeca != NULL && conectaCabeca->proximo != NULL){
-        conectaCabeca = conectaCabeca->proximo;
+        conectaCabeca = conectaCabeca->proximo;//faz a busca da ultima celula
     }
     //atualizaçao
     pLista->ultima = conectaCabeca;

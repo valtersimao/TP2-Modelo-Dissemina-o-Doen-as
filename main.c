@@ -40,10 +40,10 @@ void limpar_buffer(void) {
     int c = 0;
     while ((c = getchar()) != '\n' && c != EOF) {}
 }
-
+/*
 int main( ) {
     //Ler pessoas
-    int nPessoas = 500;
+    int nPessoas = 100;
     Lista *pessoasEstado1 = ListaCria();
     
     if(pessoasEstado1 == NULL) printf("Erro ao criar Lista de pessoas no estado 1");
@@ -62,7 +62,7 @@ int main( ) {
     }
     
     return pessoasEstado1;
-}
+}*/
 
 int main( ) {
     //Ler pessoas
