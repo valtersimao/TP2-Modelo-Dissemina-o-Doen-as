@@ -70,7 +70,7 @@ int main( ) {
     scanf("%d %d %d %d %d %d %d %d %d %d", &N, &P, &L, &K, &F, &M, &D, &R, &Y, &I);
     Parametros parametros = {N,P,L,K,F,M,D,R,Y,I};
 
-    Lista * pessoasInicio = lerListaPessoas(parametros.N);
+    Lista *pessoasInicio = lerListaPessoas(parametros.N);
 
     simular(parametros, pessoasInicio);
 

@@ -6,7 +6,7 @@
 #include "pessoa.h"
 
 /*
-True se pessa1 ttem prioridade (vem antes na lsita).
+True se pessa1 tem prioridade (vem antes na lista).
 - Mais velho deve estar na frente.
 - Se empatou a idade, True para o de menor ID.
 */

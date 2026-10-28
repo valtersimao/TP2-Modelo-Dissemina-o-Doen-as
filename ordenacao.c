@@ -50,7 +50,7 @@ void OrdenaInsertion(Lista *pLista) { //O(n²) no pior caso
         }//agora, o anterior[que recebeu busca] fica na célula depois da que a atual vai ficar
 
         //agora é só passar pra la [inserir o atual entre o anterior e o busca]
-        atual->proximo = busca;//atual vai apontar pra da frente dele [pq busca ta depois]
+        atual->proximo = busca;//atual vai apontar pra da frente dele [pq busca ta depois apontando pra frente]
         anterior->proximo = atual;
 
         //continuar avançando uma célula na originial
