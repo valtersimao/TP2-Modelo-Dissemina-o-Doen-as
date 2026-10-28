@@ -36,17 +36,9 @@ static int sorteia(int prob) {
     return valor_sorteado < prob;
 }
 
-void limpar_buffer(void) {
-    int c = 0;
-    while ((c = getchar()) != '\n' && c != EOF) {}
-}
-/*
-int main( ) {
-    //Ler pessoas
-    int nPessoas = 100;
-    Lista *pessoasEstado1 = ListaCria();
-    
-    if(pessoasEstado1 == NULL) printf("Erro ao criar Lista de pessoas no estado 1");
+Lista * lerListaPessoas(int nPessoas) {
+    Lista * listaLida = ListaCria();
+    if(listaLida == NULL) return NULL;
 
     for (int i = 0; i < nPessoas; i++) {
         char nome[100];
@@ -58,19 +50,19 @@ int main( ) {
 
         if (p == NULL) printf("Erro ao criar pessoa %d", id);
 
-        InsereOrdenado(pessoasEstado1, p);
+        InsereOrdenado(listaLida, p);
     }
     
-    return pessoasEstado1;
-}*/
+    return listaLida;
+}
 
-int main(){
+int main( ) {
     //Ler pessoas
     int N,P,L,K,F,M,D,R,Y,I;
-    scanf("%lf %lf %lf %lf %lf %lf %lf %lf %lf %lf", &N, &P, &L, &K, &F, &M, &D, &R, &Y, &I);
+    scanf("%d %d %d %d %d %d %d %d %d %d", &N, &P, &L, &K, &F, &M, &D, &R, &Y, &I);
     Parametros parametros = {N,P,L,K,F,M,D,R,Y,I};
 
-    Lista *pessoasInicio = lerListaPessoas(parametros.N);
+    Lista * pessoasInicio = lerListaPessoas(parametros.N);
 
     simular(parametros, pessoasInicio);
 

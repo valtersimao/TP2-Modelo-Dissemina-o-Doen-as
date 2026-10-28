@@ -22,7 +22,7 @@ void OrdenaInsertion(Lista *pLista) { //O(n²) no pior caso
     if(!pLista->cabeca->proximo) return;//verificar se o primeiro é NULL
 
     //Guarda o 1º elemento valido (mao esquerda)
-    Celula *atual = pLista->cabeca->proximo;//antecessor de proximoAtual
+    Celula *atual = pLista->cabeca->proximo;//antecessor de porximoAtual
     //pra percorrer a lista original
 
     //Cabeça falsa (mao direita)
@@ -44,16 +44,13 @@ void OrdenaInsertion(Lista *pLista) { //O(n²) no pior caso
         //enquanto a nova lista não finalizar e
         //a Verificação ainda receber células com pessoas válidas
         while(busca != NULL && VerificaPriori(busca->pessoa, atual->pessoa)){//pessoa da secundaria e pessoa da original
-            //laço ordenando com base na regra papae [enquanto a pessoa de BUSCA tem prioridade]
+            //laço ordenando com base na regra papae [se a pessoa de busca tem prioridade]
             anterior = busca;//ordena o de prioridade antes do menos prioritário
             busca = busca->proximo;//anda para a próxima célula da lista secundária até a da atual for prioridade
         }//agora, o anterior[que recebeu busca] fica na célula depois da que a atual vai ficar
 
-        /*avança no BUSCA enquanto ele tiver prioridade sobre o que eu quero inserir.
-        Se achar um ATUAL com prioridade, então o ATUAL vai ser inserido atrás do BUSCA*/
-
         //agora é só passar pra la [inserir o atual entre o anterior e o busca]
-        atual->proximo = busca;//atual vai apontar pra da frente dele [pq busca ta depois apontando pra frente]
+        atual->proximo = busca;//atual vai apontar pra da frente dele [pq busca ta depois]
         anterior->proximo = atual;
 
         //continuar avançando uma célula na originial
@@ -64,7 +61,7 @@ void OrdenaInsertion(Lista *pLista) { //O(n²) no pior caso
     pLista->cabeca->proximo = cabecaSecond.proximo;//reconecta a lista original no primeiro elemento na cabeça da ordenda secundária
     Celula *conectaCabeca = cabecaSecond.proximo;//poderia ser 'pLista->cabeca->proximo' tbm
     while(conectaCabeca != NULL && conectaCabeca->proximo != NULL){
-        conectaCabeca = conectaCabeca->proximo;//faz a busca da ultima celula
+        conectaCabeca = conectaCabeca->proximo;
     }
     //atualizaçao
     pLista->ultima = conectaCabeca;
@@ -78,14 +75,13 @@ void InsereOrdenado(Lista *pLista, Pessoa *pPessoa){ //O(n) no pior caso
 
     nova->pessoa = pPessoa;//passa a pessoa pra nova celula criada
     nova->proximo = NULL;
-
     Celula *anterior = pLista->cabeca;//guarda a anterior começando na cabeça
     Celula *atual = pLista->cabeca->proximo;//ponteiro pra andar na lista
 
     while(atual != NULL && VerificaPriori(atual->pessoa, pPessoa)){//se o que está na lista tem prioridade sobre a nova pessoa
         anterior = atual;
         atual = atual->proximo;
-    }//se for false o while sai [pessoa nova é mais NOVA ou possui id menor]
+    }//se for false o while sai [pessoa nova é mais velha ou possui id menor]
     //agora, a 'anterior' aponta pra célula que deve vir antes na 'nova' e 'atual' vem depois
     nova->proximo = atual;//a nova aponta para a que foi comparada da lista original
     anterior->proximo = nova;//anterior agora aponta pra nova inserida

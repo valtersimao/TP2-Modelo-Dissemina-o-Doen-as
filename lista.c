@@ -26,7 +26,6 @@ bool ListaEsvazia(Lista *pLista){
     //liberando endereço por endereço
     while(auxiliar){
         //proximo da cabeça anda pra frente e atualiza
-        //guardo o meu endereço antes de liberar a que estou agora
         proxima = auxiliar->proximo;
         free(auxiliar);
         //proximo da cabeça anda
