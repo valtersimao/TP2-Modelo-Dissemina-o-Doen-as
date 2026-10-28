@@ -64,10 +64,10 @@ int main( ) {
     return pessoasEstado1;
 }*/
 
-int main( ) {
+int main(){
     //Ler pessoas
     int N,P,L,K,F,M,D,R,Y,I;
-    scanf("%d %d %d %d %d %d %d %d %d %d", &N, &P, &L, &K, &F, &M, &D, &R, &Y, &I);
+    scanf("%lf %lf %lf %lf %lf %lf %lf %lf %lf %lf", &N, &P, &L, &K, &F, &M, &D, &R, &Y, &I);
     Parametros parametros = {N,P,L,K,F,M,D,R,Y,I};
 
     Lista *pessoasInicio = lerListaPessoas(parametros.N);
