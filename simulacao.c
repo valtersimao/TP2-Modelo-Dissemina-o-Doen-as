@@ -45,9 +45,8 @@ void simular( Parametros parametros, Lista * listaPessoasInicio) {
     for (int i = 0; i < nInfectadosDia0; i++) {
         Pessoa *p = ListaRemoveInicio(ListaPessoasEstado[0]);
         InsereOrdenado(ListaPessoasEstado[1], p);
-        Evento e = EventoCria(0, p, 1, 2);
-        EventoPrint(e);
-        PilhaInsere(historicoEventos, &e);
+        EventoAdiciona(historicoEventos, 0, p, 1, 2);
+        
     }
 
     //Simulação de cada dia
@@ -57,11 +56,13 @@ void simular( Parametros parametros, Lista * listaPessoasInicio) {
         //transformando-a em uma pessoa do estado 2.
         for (int i = 0; i < ListaPessoasEstado[1]->tamanhoDaLista; i++)  {
             if(sorteia(parametros.L) == 1) {
-                FilaInsere(FilaNovosInfectados, ListaRemoveInicio(ListaPessoasEstado[0]));
+                Pessoa *p = ListaRemoveInicio(ListaPessoasEstado[0]);
+                FilaInsere(FilaNovosInfectados, p);
+                EventoAdiciona(historicoEventos, dia, p, 1, 2);
             }
         }
 
-        //TO DO
+        //TO DO (PAREI AQUI)
         
         //Fim do dia
         //Insersção de novos infectados na Lista do Estado 2 (Infectados)

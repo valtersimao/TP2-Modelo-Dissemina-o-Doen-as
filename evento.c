@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include "evento.h"
 
-Evento EventoCria(int dia, Pessoa *pessoa, int estadoAnterior, int estadoAtual) {
+void EventoAdiciona(Pilha * pilha, int dia, Pessoa *pessoa, int estadoAnterior, int estadoAtual) {
     Evento evento = {dia, *pessoa, estadoAnterior, estadoAtual};
-    return evento;
+    PilhaInsere(pilha, &evento);
+    EventoPrint(evento);
 }
 
 void EventoPrint(Evento e) {
