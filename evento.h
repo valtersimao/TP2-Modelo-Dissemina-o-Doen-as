@@ -4,8 +4,7 @@
 #include "pessoa.h"
 #include "pilha.h"
 
-typedef struct evento
-{
+typedef struct {
     int dia;
     Pessoa pessoa;
     int estadoAnterior;

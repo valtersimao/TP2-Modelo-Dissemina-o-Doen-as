@@ -37,13 +37,13 @@ bool PilhaEhVazia(Pilha *pilha) {
 //o último elemento inserido é o primeiro a sair
 //estamos inserindo no início da lista, que representa o topo da pilha.
 
-bool PilhaInsere(Pilha *pilha, Evento *evento) { 
+bool PilhaInsere(Pilha *pilha, void *item) { 
     if(pilha == NULL) return false;
 
-    return ListaInsereInicio(pilha->lista, evento);
+    return ListaInsereInicio(pilha->lista, item);
 }
 
-Evento * PilhaRemove(Pilha *pilha){
+void * PilhaRemove(Pilha *pilha){
     if(pilha == NULL) return false;
 
     return ListaRemoveInicio(pilha->lista);

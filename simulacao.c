@@ -1,7 +1,7 @@
 #include "simulacao.h"
 #include "ordenacao.h"
 
-
+#include <stdio.h>
 //bilbioteca que é necessária pra usar o tipo 'uint32_t'
 #include <stdint.h>
 static uint32_t xorshift32(void) {
@@ -41,6 +41,7 @@ void simular( Parametros parametros, Lista * listaPessoasInicio) {
     }
     
     //Infecção inicial dia 0
+    printf("\n==========\n   DIA %d\n==========\n", 0);
     int nInfectadosDia0 = (parametros.N * parametros.P) / 100;
     for (int i = 0; i < nInfectadosDia0; i++) {
         Pessoa *p = ListaRemoveInicio(ListaPessoasEstado[0]);
@@ -51,6 +52,7 @@ void simular( Parametros parametros, Lista * listaPessoasInicio) {
 
     //Simulação de cada dia
     for (int dia = 1; dia < parametros.D; dia++) {
+        printf("\n==========\n   DIA %d\n==========\n\n", dia);
 
         //probabilidade de L% que uma pessoa do estado 2 infecte uma pessoa do estado 1
         //transformando-a em uma pessoa do estado 2.
@@ -66,7 +68,7 @@ void simular( Parametros parametros, Lista * listaPessoasInicio) {
         
         //Fim do dia
         //Insersção de novos infectados na Lista do Estado 2 (Infectados)
-        while(!FilaEhVazia) {
+        while(!FilaEhVazia(FilaNovosInfectados)) {
             InsereOrdenado(ListaPessoasEstado[1], FilaRemove(FilaNovosInfectados));
         }
         

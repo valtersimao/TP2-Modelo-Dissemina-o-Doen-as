@@ -5,13 +5,13 @@
 #include "pessoa.h"
 
 typedef struct {
-    /* data */
+    Lista * lista; //Utilizar tudo já implementado na lista
 } Fila ;
 
 Fila * FilaInicia();
-Fila * FilaLibera(Fila *pilha);
+void FilaLibera(Fila *fila);
 bool FilaEhVazia(Fila *fila);
-bool FilaInsere(Fila *fila, Pessoa *pessoa);//ultimo elemento que entrou
-Pessoa * FilaRemove(Fila *fila);//ultimo que entrou saiu primeiro
-//insere onde acabou de remover e remove onde acabou de inseri
+bool FilaInsere(Fila *fila, Pessoa *pessoa);
+Pessoa * FilaRemove(Fila *fila);
+//insere no fim e remove do inicio
 #endif

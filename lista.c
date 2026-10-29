@@ -64,7 +64,7 @@ bool ListaEhVazia(Lista *pLista){
         else
             return false;
     }
-    return false;
+    return true;
 }
 
 bool ListaInsereFim(Lista *pLista, Pessoa *pPessoa){
