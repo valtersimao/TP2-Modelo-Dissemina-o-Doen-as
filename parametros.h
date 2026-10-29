@@ -11,7 +11,7 @@ typedef struct parametros{
     int D;// -> duração da simulação, em dias
     int R;// -> dia em que a vacina passa a ser distribuída
     int Y;// -> a cada dia, a partir de R, são distribuídas N/Y vacinas.
-    int I;// iterações/indice pra gerenciar posição ao percorrer o arquivo
+    int I;// Repetir sua simulação I vezes. 
 } Parametros;
 
 #endif

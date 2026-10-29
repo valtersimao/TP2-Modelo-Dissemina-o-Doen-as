@@ -55,6 +55,18 @@ void simular( Parametros parametros, Lista * listaPessoasInicio) {
     for (int dia = 1; dia < parametros.D; dia++) {
         printf("\n==========\n   DIA %d\n==========\n\n", dia);
 
+        //VACINAÇÃO
+        if(dia > parametros.R) {
+            int vacinasHoje = parametros.N / parametros.Y;
+            for (int i = 0; i < vacinasHoje; i++) {
+                if(ListaEhVazia(ListaPessoasEstado[0])) break;
+                Pessoa *p = ListaRemoveInicio(ListaPessoasEstado[0]);
+                InsereOrdenado(ListaPessoasEstado[4], p);
+                EventoAdiciona(historicoEventos, dia, p, 1, 5);
+            }
+            
+        }
+
         //probabilidade de L% que uma pessoa do estado 2 infecte uma pessoa do estado 1
         //transformando-a em uma pessoa do estado 2.
         for (int i = 0; i < ListaPessoasEstado[1]->tamanhoDaLista; i++)  {
@@ -83,20 +95,31 @@ void simular( Parametros parametros, Lista * listaPessoasInicio) {
         //(isto é, desenvolva a Doença-X). Há também uma probabilidade complementar de (100 − F )% 
         //que uma pessoa do estado 2 não desenvolva a doença e novamente se torne uma pessoa do estado 1.
         for (int i = ListaPessoasEstado[1]->tamanhoDaLista - 1; i >= 0; i--) {
-        //Passando de trás para frente para as pessoas removidas não alteram os indices da lista
+        //Passando de trás para frente para as pessoas removidas não alterarem os indices da lista
             Pessoa *p = ListaRetiraMeioIndice(ListaPessoasEstado[1], i);
             if (sorteia(parametros.F) == 1) {
                 FilaInsere(FilaNovosDoentes, p);
                 EventoAdiciona(historicoEventos, dia, p, 2, 3);
             } else {
-                //FilaInsere(FilaNovosDoentes, p);
                 InsereOrdenado(ListaPessoasEstado[0], p);
                 EventoAdiciona(historicoEventos, dia, p, 2, 1);
             }
         }
         
-        //TO DO (PAREI AQUI)
-        
+        //Após um dia de desenvolvimento da doença, há uma probabilidade de M% de que um indivíduo do estado 3 venha a óbito
+        // (isto é, passe para o estado 4) ou de (100 − M)% que ele se cure (isto é, retorne para o estado 1).
+        for (int i = ListaPessoasEstado[2]->tamanhoDaLista - 1; i >= 0; i--) {
+            //Passando de trás para frente para as pessoas removidas não alterarem os indices da lista
+            Pessoa *p = ListaRetiraMeioIndice(ListaPessoasEstado[2], i);
+            if (sorteia(parametros.M) == 1) {
+                InsereOrdenado(ListaPessoasEstado[3], p);
+                EventoAdiciona(historicoEventos, dia, p, 3, 4);
+            } else {
+                InsereOrdenado(ListaPessoasEstado[0], p);
+                EventoAdiciona(historicoEventos, dia, p, 3, 1);
+            }
+        }
+
         //Fim do dia
         //Insersção de novos infectados na Lista do Estado 2 (Infectados)
         while(!FilaEhVazia(FilaNovosInfectados)) {
@@ -108,6 +131,15 @@ void simular( Parametros parametros, Lista * listaPessoasInicio) {
         }
         
     }
+    
+    //calcular % de cada estado
+    printf("\n=============================\n   Porcentagens Finais\n=============================\n");
+    printf(" - Pessoas Saudáveis: %.2f%%\n", ((float)ListaPessoasEstado[0]->tamanhoDaLista / parametros.N * 100.0));
+    printf(" - Pessoas Infectadas: %.2f%%\n", ((float)ListaPessoasEstado[1]->tamanhoDaLista / parametros.N * 100.0));
+    printf(" - Pessoas Doentes: %.2f%%\n", ((float)ListaPessoasEstado[2]->tamanhoDaLista / parametros.N * 100.0));
+    printf(" - Pessoas Mortas: %.2f%%\n", ((float)ListaPessoasEstado[3]->tamanhoDaLista / parametros.N * 100.0));
+    printf(" - Pessoas Vacinadas: %.2f%%\n", ((float)ListaPessoasEstado[4]->tamanhoDaLista / parametros.N * 100.0));
+    printf("=============================\n");
     
     
     FilaLibera(FilaNovosInfectados);
