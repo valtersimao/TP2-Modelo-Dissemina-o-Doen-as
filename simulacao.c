@@ -78,18 +78,17 @@ void simular( Parametros parametros, Lista * listaPessoasInicio) {
                 }
             }
         }
-        
+
         //Após um dia da infecção, há uma probabilidade de F% que uma pessoa do estado 2 avance para o estado 3 
         //(isto é, desenvolva a Doença-X). Há também uma probabilidade complementar de (100 − F )% 
         //que uma pessoa do estado 2 não desenvolva a doença e novamente se torne uma pessoa do estado 1.
         for (int i = ListaPessoasEstado[1]->tamanhoDaLista - 1; i >= 0; i--) {
         //Passando de trás para frente para as pessoas removidas não alteram os indices da lista
+            Pessoa *p = ListaRetiraMeioIndice(ListaPessoasEstado[1], i);
             if (sorteia(parametros.F) == 1) {
-                Pessoa *p = ListaRetiraMeioIndice(ListaPessoasEstado[1], i);
                 FilaInsere(FilaNovosDoentes, p);
                 EventoAdiciona(historicoEventos, dia, p, 2, 3);
-            } else if (sorteia(100 - parametros.F) == 1) {
-                Pessoa *p = ListaRetiraMeioIndice(ListaPessoasEstado[1], i);
+            } else {
                 //FilaInsere(FilaNovosDoentes, p);
                 InsereOrdenado(ListaPessoasEstado[0], p);
                 EventoAdiciona(historicoEventos, dia, p, 2, 1);
@@ -105,7 +104,7 @@ void simular( Parametros parametros, Lista * listaPessoasInicio) {
         }
         //Insersção de novos doentes na Lista do Estado 3
         while(!FilaEhVazia(FilaNovosDoentes)) {
-            InsereOrdenado(ListaPessoasEstado[2], FilaRemove(FilaNovosInfectados));
+            InsereOrdenado(ListaPessoasEstado[2], FilaRemove(FilaNovosDoentes));
         }
         
     }
