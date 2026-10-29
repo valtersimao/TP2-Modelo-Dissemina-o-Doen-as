@@ -22,7 +22,8 @@ bool ListaEhVazia(Lista *pLista);
 bool ListaInsereFim(Lista *pLista, Pessoa *pPessoa);
 bool ListaInsereInicio(Lista *pLista, void *pPessoa);
 
-Pessoa *ListaRetiraMeio(Lista *pLista, int pessoa_id);
+Pessoa *ListaRetiraMeioId(Lista *pLista, int pessoa_id); 
+Pessoa *ListaRetiraMeioIndice(Lista * plista, int indice);
 void *ListaRemoveInicio(Lista *pLista);
 Pessoa *ListaRemoveFim(Lista *pLista);
 

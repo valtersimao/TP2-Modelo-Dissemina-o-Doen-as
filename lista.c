@@ -110,7 +110,7 @@ PILHA - O index vai ser sempre o tamanho da lista
 [int tamanhoDaLista] pra REMOÇÃO LIFO
 */
 
-Pessoa *ListaRetiraMeio(Lista *pLista, int pessoa_id){
+Pessoa *ListaRetiraMeioId(Lista *pLista, int pessoa_id){ //Retira a pessoa pelo ID dela
     if(!pLista) return NULL;
 
     Celula *anterior = pLista->cabeca;
@@ -121,6 +121,36 @@ Pessoa *ListaRetiraMeio(Lista *pLista, int pessoa_id){
         anterior = atual;
         atual = atual->proximo;
     }
+    if(!atual) return NULL;
+
+    //pra remover a célula encontrada da lista
+    anterior->proximo = atual->proximo;
+    if(atual == pLista->ultima){//se a que eu removi era a última
+        //atualizo o ponteiro que ultima irá apontar
+        pLista->ultima = anterior;
+    }
+    //guarda e passa a pessoa antes de liberar a Célula
+    Pessoa *pessoaRemovida = atual->pessoa;
+    free(atual);
+    
+    pLista->tamanhoDaLista--;
+    
+    return pessoaRemovida;//por isso que é do tipo 'Pessoa'
+}
+
+Pessoa *ListaRetiraMeioIndice(Lista *pLista, int indice){ //Retira a pessoa pelo indice da posicao na lista de 0 a n
+    if(!pLista) return NULL;
+    if(indice >= pLista->tamanhoDaLista) return NULL;
+
+
+    Celula *anterior = pLista->cabeca;
+    Celula *atual = pLista->cabeca->proximo;//a busca começa daqui
+
+    for (int i = 0; i < indice; i++) {
+        anterior = atual;
+        atual = atual->proximo;
+    }
+    
     if(!atual) return NULL;
 
     //pra remover a célula encontrada da lista

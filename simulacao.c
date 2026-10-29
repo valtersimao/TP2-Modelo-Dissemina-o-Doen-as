@@ -26,6 +26,7 @@ static int sorteia(int prob) {
 void simular( Parametros parametros, Lista * listaPessoasInicio) {
     Pilha * historicoEventos = PilhaInicia();
     Fila * FilaNovosInfectados = FilaInicia();
+    Fila * FilaNovosDoentes = FilaInicia();
     //Vetor de 5 posições de ponteiros, onde cada posição indica uma lista de pessoas em estados diferentes
     /*(
     [0] - Estado 1: Pessoas saudáveis
@@ -58,12 +59,43 @@ void simular( Parametros parametros, Lista * listaPessoasInicio) {
         //transformando-a em uma pessoa do estado 2.
         for (int i = 0; i < ListaPessoasEstado[1]->tamanhoDaLista; i++)  {
             if(sorteia(parametros.L) == 1) {
-                Pessoa *p = ListaRemoveInicio(ListaPessoasEstado[0]);
-                FilaInsere(FilaNovosInfectados, p);
-                EventoAdiciona(historicoEventos, dia, p, 1, 2);
+                if(!ListaEhVazia(ListaPessoasEstado[0])) {
+                    Pessoa *p = ListaRemoveInicio(ListaPessoasEstado[0]);
+                    FilaInsere(FilaNovosInfectados, p);
+                    EventoAdiciona(historicoEventos, dia, p, 1, 2);
+                }
             }
         }
 
+        //Há uma probabilidade de K% de que uma pessoa do estado 3 infecte uma pessoa do estado 1
+        //transformando-a em uma pessoa do estado 2. Neste cenário, K > L, pois as pessoas que desenvolveram a doença têm uma carga viral muito maior.
+        for (int i = 0; i < ListaPessoasEstado[2]->tamanhoDaLista; i++)  {
+            if(sorteia(parametros.L) == 1) {
+                if(!ListaEhVazia(ListaPessoasEstado[0])) {
+                    Pessoa *p = ListaRemoveInicio(ListaPessoasEstado[0]);
+                    FilaInsere(FilaNovosInfectados, p);
+                    EventoAdiciona(historicoEventos, dia, p, 1, 2);
+                }
+            }
+        }
+        
+        //Após um dia da infecção, há uma probabilidade de F% que uma pessoa do estado 2 avance para o estado 3 
+        //(isto é, desenvolva a Doença-X). Há também uma probabilidade complementar de (100 − F )% 
+        //que uma pessoa do estado 2 não desenvolva a doença e novamente se torne uma pessoa do estado 1.
+        for (int i = ListaPessoasEstado[1]->tamanhoDaLista - 1; i >= 0; i--) {
+        //Passando de trás para frente para as pessoas removidas não alteram os indices da lista
+            if (sorteia(parametros.F) == 1) {
+                Pessoa *p = ListaRetiraMeioIndice(ListaPessoasEstado[1], i);
+                FilaInsere(FilaNovosDoentes, p);
+                EventoAdiciona(historicoEventos, dia, p, 2, 3);
+            } else if (sorteia(100 - parametros.F) == 1) {
+                Pessoa *p = ListaRetiraMeioIndice(ListaPessoasEstado[1], i);
+                //FilaInsere(FilaNovosDoentes, p);
+                InsereOrdenado(ListaPessoasEstado[0], p);
+                EventoAdiciona(historicoEventos, dia, p, 2, 1);
+            }
+        }
+        
         //TO DO (PAREI AQUI)
         
         //Fim do dia
@@ -71,11 +103,16 @@ void simular( Parametros parametros, Lista * listaPessoasInicio) {
         while(!FilaEhVazia(FilaNovosInfectados)) {
             InsereOrdenado(ListaPessoasEstado[1], FilaRemove(FilaNovosInfectados));
         }
+        //Insersção de novos doentes na Lista do Estado 3
+        while(!FilaEhVazia(FilaNovosDoentes)) {
+            InsereOrdenado(ListaPessoasEstado[2], FilaRemove(FilaNovosInfectados));
+        }
         
     }
     
     
     FilaLibera(FilaNovosInfectados);
+    FilaLibera(FilaNovosDoentes);
     PilhaLibera(historicoEventos);
     for (int i = 0; i < 5; i++) ListaDestroi(ListaPessoasEstado[i]);
 }
