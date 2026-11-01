@@ -1,5 +1,7 @@
 # Relatório - Trabalho Prático 2
 
+## ``TAD Pessoa``
+
 Para armazenar os dados das pessoas inicialmente, criamos um ``TAD Pessoa`` com 3 funções, 2 do tipo ``Pessoa`` e a outra do tipo ``void``:
 
 ### `Pessoa` *PessoaCria (int id, int idade, char *nome)
@@ -14,7 +16,8 @@ Libera o nome alocado e a struct referente a 01 pessoa.
 
 Imprime as informações de uma pessoa onde for chamada.
 
-\
+## ``TAD Lista``
+
 Na parte da implemtentação do ``TAD Lista``, criamos uma _lista encadeada com cabeça_ com as funções básicas que julgamos necessárias, considerando também os TAD's Fila, Pilha e Pessoa:
 
 ### `bool` ListaEsvazia (Lista *pLista)
@@ -29,7 +32,8 @@ Libera pesoa por pessoa com `PessoaDestroi()` antes de liberar as células com o
 
 A decisão de implementar um ponteiro para *void nela surgiu quando nosso ``TAD Eventos`` começou a barrar o tipo Pessoa que foi anteriormente declarado, agora nossa Pilha de Eventos trabalha com um ponteiro genérico, mantendo a passagem correta dos dados.
 
-\
+## ``TAD Ordenacao``
+
 O ``TAD Ordenacao`` é responsável por manter a toda a lista de pessoas, a pilha de eventos e a fila de pessoas que já foram infectadas, ordenadas mediante as regras de prioridade:
 
 ### `bool` VerificaPriori (Pessoa *pessoa1, Pessoa *pessoa2)
@@ -62,7 +66,7 @@ pLista->ultima = conectaCabeca;
 
 Realiza o trabalho _refinado_ de ordenação. Por exemplo, se alguma pessoa se _curar_ e voltar para o `Estado 1`, essa pessoa será inserida ordenadamente conforme a disposição das demais pessoas na lista do `Estado 1`. Toda vez que for preciso transitar uma pessoa sobre uma nova lista, a função insere automaticamente na posição que segue as regras de prioridade.
 \
-O `while` faz a verificação se quem já está na lista tem prioridade sobre a **_nova pessoa_** que será inserida.
+O `while` faz a verificação: se quem já está na lista tem prioridade sobre a **_nova pessoa_** que será inserida.
 
 ```c
 //se o que está na lista tem prioridade sobre a nova pessoa
@@ -77,4 +81,18 @@ nova->proximo = atual;
 anterior->proximo = nova;
 //agora ela está inserida entre nova e atual
 ```
+
+## ``TAD Evento``
+
+O `TAD Evento` foi modificado para atuar de forma independente `TAD Pilha`, antes havia gerado um problema de dependênicia circular.
+
+### `Evento` EventoAdiciona(int dia, Pessoa *pessoa, int estadoAnterior, int estadoAtual):
+
+_Aloca_ um evento e depois é passado para a _Pilha_ em `simulacao.c`, registra **dia da ocorrência**, a **pessoa** e a **transição dos Estados**. Ela retorna o _ponteiro do evento_ que foi criado pro motor da simulação e é inserido ali.
+
+### ``void`` EventoDestroi(Evento *e):
+
+Libera a memória alocada em cada _Evento_ quando realiza a liberação da `Pilha` no final de cada `simualção`.
+
+## ``TAD Fila``
 
