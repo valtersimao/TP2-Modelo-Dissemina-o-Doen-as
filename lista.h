@@ -16,7 +16,8 @@ typedef struct lista {
 } Lista;
 
 Lista *ListaCria();
-Lista *ListaDestroi(Lista *pLista);
+void *ListaDestroi(Lista *pLista);
+void *ListaDestroiFinalSimulacoes(Lista *pLista);
 bool ListaEsvazia(Lista *pLista);
 bool ListaEhVazia(Lista *pLista);
 bool ListaInsereFim(Lista *pLista, Pessoa *pPessoa);

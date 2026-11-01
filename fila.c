@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 Fila *FilaInicia() {
-    Fila *fila = malloc(sizeof(fila));
+    Fila *fila = malloc(sizeof(Fila));
 
     if (fila == NULL)
         return NULL;

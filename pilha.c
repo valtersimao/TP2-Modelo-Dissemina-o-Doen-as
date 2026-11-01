@@ -9,7 +9,6 @@ Pilha *PilhaInicia() {
     if (pilha == NULL)
         return NULL;
 
-
     pilha->lista = ListaCria();
 
     if (pilha->lista == NULL) {
@@ -47,4 +46,18 @@ void * PilhaRemove(Pilha *pilha){
     if(pilha == NULL) return false;
 
     return ListaRemoveInicio(pilha->lista);
+}
+
+void PilhaLiberaEventos(Pilha *pilha) {
+    if (!pilha) return;
+    
+    // Enquanto a pilha não estiver vazia, remove o item e destroi
+    while (!PilhaEhVazia(pilha)) {
+        Evento *evento = (Evento*) PilhaRemove(pilha);
+        EventoDestroi(evento);
+    }
+    
+    // Agora que a lista interna está vazia e os eventos foram liberados,
+    // podemos liberar a estrutura da pilha
+    PilhaLibera(pilha); 
 }

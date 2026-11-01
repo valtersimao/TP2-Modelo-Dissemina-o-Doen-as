@@ -1,4 +1,4 @@
-1000 5 12 35 40 5 40 35 20 30
+1000 1 80 95 60 2 180 64 20 10
 Helena_Gomes 0 31
 Olivia_Dias 1 76
 Daniela_Nunes 2 38

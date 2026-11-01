@@ -19,6 +19,7 @@ Lista *ListaCria(){
     return pLista;
 }
 
+//libera só as céluas, não as pessoas
 bool ListaEsvazia(Lista *pLista){
     if(!pLista) return false;
     Celula *auxiliar = pLista->cabeca->proximo;
@@ -39,15 +40,23 @@ bool ListaEsvazia(Lista *pLista){
     return true;
 }
 
-Lista *ListaDestroi(Lista *pLista){
+void *ListaDestroiFinalSimulacoes(Lista *pLista){
     if(!pLista) return NULL;
-
     Celula *liberaPessoas = pLista->cabeca->proximo;
     //liberando pessoa por pessoa
     while(liberaPessoas){
         PessoaDestroi(liberaPessoas->pessoa);
         liberaPessoas = liberaPessoas->proximo;
     }
+    ListaEsvazia(pLista);
+    free(pLista->cabeca);
+    free(pLista);
+    return NULL;
+}
+
+//destroi sá a lista, mantendo as informações das pessoas ainda para as demais simulações
+void *ListaDestroi(Lista *pLista){
+    if(!pLista) return NULL;
 
     ListaEsvazia(pLista);
 

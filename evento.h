@@ -2,7 +2,6 @@
 #define EVENTO_H
 
 #include "pessoa.h"
-#include "pilha.h"
 
 typedef struct {
     int dia;
@@ -11,7 +10,8 @@ typedef struct {
     int estadoAtual;
 }Evento;
 
-void EventoAdiciona(Pilha * pilha, int dia, Pessoa *pessoa, int estadoAnterior, int estadoAtual);
-void EventoPrint(Evento e);
+Evento *EventoAdiciona(int dia, Pessoa *pessoa, int estadoAnterior, int estadoAtual);
+void EventoPrint(Evento *e);
+void EventoDestroi(Evento *e);
 
 #endif

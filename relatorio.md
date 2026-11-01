@@ -60,3 +60,21 @@ pLista->ultima = conectaCabeca;
 
 ### InsereOrdenado(Lista *pLista, Pessoa *pPessoa)
 
+Realiza o trabalho _refinado_ de ordenação. Por exemplo, se alguma pessoa se _curar_ e voltar para o `Estado 1`, essa pessoa será inserida ordenadamente conforme a disposição das demais pessoas na lista do `Estado 1`. Toda vez que for preciso transitar uma pessoa sobre uma nova lista, a função insere automaticamente na posição que segue as regras de prioridade.
+\
+O `while` faz a verificação se quem já está na lista tem prioridade sobre a **_nova pessoa_** que será inserida.
+
+```c
+//se o que está na lista tem prioridade sobre a nova pessoa
+while(atual != NULL && VerificaPriori(atual->pessoa, pPessoa)){
+    anterior = atual;
+    atual = atual->proximo;
+}
+/*se for false o while sai [pessoa nova
+é mais velha ou possui id menor]*/
+nova->proximo = atual;
+//a nova aponta para a que foi comparada da lista original
+anterior->proximo = nova;
+//agora ela está inserida entre nova e atual
+```
+
