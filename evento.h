@@ -5,13 +5,14 @@
 
 typedef struct {
     int dia;
-    Pessoa pessoa;
+    Pessoa *pessoa;
     int estadoAnterior;
     int estadoAtual;
 }Evento;
 
-Evento *EventoAdiciona(int dia, Pessoa *pessoa, int estadoAnterior, int estadoAtual);
+Evento *EventoCria(int dia, Pessoa *pessoa, int estadoAnterior, int estadoAtual);
+Evento *EventoDestroi(Evento *e);
 void EventoPrint(Evento *e);
-void EventoDestroi(Evento *e);
+
 
 #endif

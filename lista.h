@@ -16,13 +16,12 @@ typedef struct lista {
 } Lista;
 
 Lista *ListaCria();
-void *ListaDestroi(Lista *pLista);
-void *ListaDestroiFinalSimulacoes(Lista *pLista);
+Lista *ListaDestroi(Lista *pLista);
 bool ListaEsvazia(Lista *pLista);
 bool ListaEhVazia(Lista *pLista);
 bool ListaInsereFim(Lista *pLista, Pessoa *pPessoa);
 bool ListaInsereInicio(Lista *pLista, void *pPessoa);
-
+Lista * ListaDuplica(Lista * lista);
 Pessoa *ListaRetiraMeioId(Lista *pLista, int pessoa_id); 
 Pessoa *ListaRetiraMeioIndice(Lista * plista, int indice);
 void *ListaRemoveInicio(Lista *pLista);

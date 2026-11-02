@@ -1,5 +1,6 @@
 #include "lista.h"
 #include <stdlib.h>
+#include "ordenacao.h"
 Lista *ListaCria(){
     Lista *pLista = (Lista*) malloc(sizeof(Lista));
     if(!pLista) return NULL;
@@ -19,7 +20,6 @@ Lista *ListaCria(){
     return pLista;
 }
 
-//libera só as céluas, não as pessoas
 bool ListaEsvazia(Lista *pLista){
     if(!pLista) return false;
     Celula *auxiliar = pLista->cabeca->proximo;
@@ -40,23 +40,15 @@ bool ListaEsvazia(Lista *pLista){
     return true;
 }
 
-void *ListaDestroiFinalSimulacoes(Lista *pLista){
+Lista *ListaDestroi(Lista *pLista){
     if(!pLista) return NULL;
+
     Celula *liberaPessoas = pLista->cabeca->proximo;
     //liberando pessoa por pessoa
     while(liberaPessoas){
         PessoaDestroi(liberaPessoas->pessoa);
         liberaPessoas = liberaPessoas->proximo;
     }
-    ListaEsvazia(pLista);
-    free(pLista->cabeca);
-    free(pLista);
-    return NULL;
-}
-
-//destroi sá a lista, mantendo as informações das pessoas ainda para as demais simulações
-void *ListaDestroi(Lista *pLista){
-    if(!pLista) return NULL;
 
     ListaEsvazia(pLista);
 
@@ -219,4 +211,33 @@ Pessoa *ListaRemoveFim(Lista *pLista){
     pLista->tamanhoDaLista--;
 
     return pessoaRemovida;
+}
+
+Lista *ListaDuplica(Lista *listaOriginal) {
+    Lista *novaLista = ListaCria();
+
+    if (novaLista == NULL) return NULL;
+
+    Celula *atual = listaOriginal->cabeca->proximo;
+
+    while (atual != NULL) {
+        Pessoa *p = atual->pessoa;
+
+        Pessoa *novaPessoa = PessoaCria(
+            p->id,
+            p->idade,
+            p->nome
+        );
+
+        if (novaPessoa == NULL) {
+            ListaDestroi(novaLista);
+            return NULL;
+        }
+
+        InsereOrdenado(novaLista, novaPessoa);
+
+        atual = atual->proximo;
+    }
+
+    return novaLista;
 }

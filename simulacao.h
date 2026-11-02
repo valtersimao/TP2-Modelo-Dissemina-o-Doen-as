@@ -7,6 +7,6 @@
 #include "parametros.h"
 #include "evento.h"
 
-void simular(Parametros parametros, Lista * listaPessoasInicio);
+float * simular (Parametros parametros, Lista * listaPessoasInicio);
 
 #endif //SIMULACAO_H

@@ -41,7 +41,31 @@ int main( ) {
 
     Lista * pessoasInicio = lerListaPessoas(parametros.N);
 
-    simular(parametros, pessoasInicio);
+    //alocar resultado simulacao
+    float * resultadoSimulacao = malloc(5 * sizeof(float));
+    for (int i = 0; i < 5; i++) resultadoSimulacao[i] = 0;
+    
+
+    for (int sim = 0; sim < parametros.I; sim++) {
+        printf("\nSimulação %d:\n", sim+1);
+        float * temp = simular(parametros, ListaDuplica(pessoasInicio)); //manda uma lista duplicada para não afetar a lista original
+        for (int i = 0; i < 5; i++) resultadoSimulacao[i] += temp[i];
+        free(temp);
+        
+    }
+    
+    for (int i = 0; i < 5; i++) resultadoSimulacao[i] /= parametros.I;   
+    //calcular % de cada estado
+    printf("\n=============================\n   Porcentagens Finais \n=============================\n");
+    printf(" - Pessoas Saudáveis: %.2f%%\n", resultadoSimulacao[0]);
+    printf(" - Pessoas Infectadas: %.2f%%\n",resultadoSimulacao[1]);
+    printf(" - Pessoas Doentes: %.2f%%\n", resultadoSimulacao[2]);
+    printf(" - Pessoas Mortas: %.2f%%\n", resultadoSimulacao[3]);
+    printf(" - Pessoas Vacinadas: %.2f%%\n", resultadoSimulacao[4]);
+    printf("=============================\n");
+
+    free(resultadoSimulacao);
+    free(pessoasInicio);
 
     return 0;
 }
