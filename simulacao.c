@@ -80,7 +80,7 @@ float * simular( Parametros parametros, Lista * listaPessoasInicio) {
         //printf("\n==========\n   DIA %d\n==========\n\n", dia);
 
         //VACINAÇÃO
-        if(dia > parametros.R) {
+        if(dia >= parametros.R) {
             int vacinasHoje = parametros.N / parametros.Y;
             for (int i = 0; i < vacinasHoje; i++) {
                 if(ListaEhVazia(ListaPessoasEstado[0])) break;
