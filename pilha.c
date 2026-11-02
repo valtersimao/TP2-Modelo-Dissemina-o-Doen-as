@@ -39,12 +39,10 @@ bool PilhaEhVazia(Pilha *pilha) {
 
 bool PilhaInsere(Pilha *pilha, void *item) { 
     if(pilha == NULL) return false;
-
     return ListaInsereInicio(pilha->lista, item);
 }
 
-void * PilhaRemove(Pilha *pilha){
+void *PilhaRemove(Pilha *pilha){
     if(pilha == NULL) return false;
-
     return ListaRemoveInicio(pilha->lista);
 }

@@ -20,6 +20,10 @@ Imprime as informações de uma pessoa onde for chamada.
 
 Na parte da implemtentação do ``TAD Lista``, criamos uma _lista encadeada com cabeça_ com as funções básicas que julgamos necessárias, considerando também os TAD's Fila, Pilha e Pessoa:
 
+### `Lista` ListaDuplica(Lista *ListaOriginal)
+
+A função `ListaDuplica()` faz uma cópia inteira da lista que contém todas as pessoas e também de cada pessoa com `PessoaCria()`. Dessa forma, cada simulação pode destruir cada lista sem corromper os dados originais _(das pessoas)_, edixando-os intactos para a próxima simulação.
+
 ### `bool` ListaEsvazia (Lista *pLista)
 
 É chamada depois que as _pessoas_ são liberadas (em `ListaDestroi()`), dando _free_ normalmente em cada célula da lista com um ponteiro sempre para a próxima célula a ser liberada, começando pelo início. Após liberar todas as células, ela torna a lista reutilizável novamente para uma próxima simulação.
@@ -84,13 +88,13 @@ anterior->proximo = nova;
 
 O `TAD Evento` foi modificado para atuar de forma independente ao `TAD Pilha`, antes havia gerado um problema de dependênicia circular.
 
-### `Evento` EventoAdiciona(int dia, Pessoa *pessoa, int estadoAnterior, int estadoAtual):
+### `Evento` EventoCria(int dia, Pessoa *pessoa, int estadoAnterior, int estadoAtual):
 
-_Aloca_ um evento e depois é passado para a _Pilha_ em `simulacao.c`, registra **dia da ocorrência**, a **pessoa** e a **transição dos Estados**. Ela retorna o _ponteiro do evento_ que foi criado pro motor da simulação e é inserido ali, na Pilha.
+_Aloca_ um evento e depois é passado para a _Pilha_ em `simulacao.c`, registra **dia da ocorrência**, o ponteiro para a **pessoa** e a **transição dos Estados**. Ela retorna o _ponteiro do evento_ que foi criado (_alocado_) pro motor da simulação e é inserido ali, na Pilha, durante a simulação.
 
 ### ``void`` EventoDestroi(Evento *e):
 
-Libera a memória alocada em cada _Evento_ quando realiza a liberação da `Pilha` no final de cada `simualção`.
+Libera a memória alocada em cada _Evento_ quando realiza a liberação da `Pilha` no final de cada `simualção` e retorna _NULL_.
 
 ## ``TAD Fila``
 
@@ -105,6 +109,6 @@ O `TAD Pilha` segue as regras _**LIFO** (Last-In, First-Out)_ também encapsulan
 
 As operações de **inserir** e **remover** na pilha ocorrem na _cabeça da lista_, isso nos ajudou a manter a ordem cronológica certa em  movimentar os Eventos usando a **ordem reversa** de inserção da pilha.
 
-### ``void`` PilhaLiberaEventos():
+### ``void`` PilhaLibera(Pilha *pilha):
 
-A cada simulação $I$ a função esvazia o histórico de _Eventos_ com `EventoDestroi` em cada elemento da Pilha. Assim todos os eventos das $I$ simulações não ficam acumulados.
+Libera todas as células da `Lista`, desalocando cada item que contém os dados base. Depois disso, desaloca a pilha de memória indicando a limpeza final da pilha (_isso após todos os dados já terem sido tratados corretamente durante a simulação_).
