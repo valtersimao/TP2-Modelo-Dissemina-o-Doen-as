@@ -7,7 +7,6 @@ Fila *FilaInicia() {
     if (fila == NULL)
         return NULL;
 
-
     fila->lista = ListaCria();
 
     if (fila->lista == NULL) {
@@ -39,6 +38,5 @@ bool FilaInsere(Fila *fila, Pessoa *pessoa) {
 }
 Pessoa * FilaRemove(Fila *fila) {
     if(fila == NULL) return false;
-
     return ListaRemoveInicio(fila->lista);
 }

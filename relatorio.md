@@ -2,7 +2,7 @@
 
 ## ``TAD Pessoa``
 
-Para armazenar os dados das pessoas inicialmente, criamos um ``TAD Pessoa`` com 3 funções, 2 do tipo ``Pessoa`` e a outra do tipo ``void``:
+Para armazenar os dados das pessoas inicialmente, criamos um ``TAD Pessoa`` com 3 funções, 2 sendo do tipo ``Pessoa`` e a outra do tipo ``void``:
 
 ### `Pessoa` *PessoaCria (int id, int idade, char *nome)
 
@@ -38,9 +38,7 @@ O ``TAD Ordenacao`` é responsável por manter a toda a lista de pessoas, a pilh
 
 ### `bool` VerificaPriori (Pessoa *pessoa1, Pessoa *pessoa2)
 
-A função trabalha como um comparador que retorna true se a pessoa 1 tem prioridade sobre a pessoa 2 quando ela vem antes da 2. Se a pessoa 2 tem a prieridade, (return false) a pessoa 2 é inserida antes da pessoa 1 na lista.
-\
-Decidimos usar um _Insertion Sort_, rodando toda a lista com as informações provenientes do arquivo.
+A função trabalha como um comparador que retorna _true_ se a pessoa 1 tem prioridade sobre a pessoa 2 quando ela vem antes da 2. Se a pessoa 2 tem a prioridade (_return false_), a pessoa 2 é inserida antes da pessoa 1 na lista. Decidimos usar um _Insertion Sort_, rodando toda a lista com as informações provenientes do arquivo.
 
 ### `void` OrdenaInsertion (Lista *pLista)
 
@@ -84,11 +82,11 @@ anterior->proximo = nova;
 
 ## ``TAD Evento``
 
-O `TAD Evento` foi modificado para atuar de forma independente `TAD Pilha`, antes havia gerado um problema de dependênicia circular.
+O `TAD Evento` foi modificado para atuar de forma independente ao `TAD Pilha`, antes havia gerado um problema de dependênicia circular.
 
 ### `Evento` EventoAdiciona(int dia, Pessoa *pessoa, int estadoAnterior, int estadoAtual):
 
-_Aloca_ um evento e depois é passado para a _Pilha_ em `simulacao.c`, registra **dia da ocorrência**, a **pessoa** e a **transição dos Estados**. Ela retorna o _ponteiro do evento_ que foi criado pro motor da simulação e é inserido ali.
+_Aloca_ um evento e depois é passado para a _Pilha_ em `simulacao.c`, registra **dia da ocorrência**, a **pessoa** e a **transição dos Estados**. Ela retorna o _ponteiro do evento_ que foi criado pro motor da simulação e é inserido ali, na Pilha.
 
 ### ``void`` EventoDestroi(Evento *e):
 
@@ -96,3 +94,17 @@ Libera a memória alocada em cada _Evento_ quando realiza a liberação da `Pilh
 
 ## ``TAD Fila``
 
+Criamos a fila encapsulando o `TAD Lista` conforme as regras _**FIFO** (First-In, First-Out)_, assim conseguimos isolar os eventos de cada dia específico. Inserimos no _início da lista_, que representa o _topo da pilha_.
+As funções ``FilaInsere`` e ``FilaRemove`` funcionam por meio das funções ``ListaInsereFim`` e ``ListaRemoveInicio``. O TAD realiza a função de armazenar os novos infectados e os novos doentes, cumprindo a exigência de que uma pessoa infectada no _**dia d**_ só é transferida para o Estado 2 ou 3 no _fim do mesmo dia_, podendo infectar as demais **somente** no dia seguinte _**(d+1)**_.
+
+## ``TAD Pilha``
+
+O `TAD Pilha` segue as regras _**LIFO** (Last-In, First-Out)_ também encapsulanndo o `TAD Lista`. A `Pilha` é responsável por _armazenar o histórico de transições_ das pessoas entre os Estados.
+
+### ``Pilha`` *PilhaInsere() & ``Pilha`` *PilhaRemove():
+
+As operações de **inserir** e **remover** na pilha ocorrem na _cabeça da lista_, isso nos ajudou a manter a ordem cronológica certa em  movimentar os Eventos usando a **ordem reversa** de inserção da pilha.
+
+### ``void`` PilhaLiberaEventos():
+
+A cada simulação $I$ a função esvazia o histórico de _Eventos_ com `EventoDestroi` em cada elemento da Pilha. Assim todos os eventos das $I$ simulações não ficam acumulados.
